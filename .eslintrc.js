@@ -5,8 +5,7 @@ module.exports = {
         "es6": true
     },
         "extends": [
-            "airbnb-base",
-            "prettier"
+            "airbnb-base"
         ],
     "globals": {
         "Atomics": "readonly",
