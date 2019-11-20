@@ -18,7 +18,6 @@ module.exports = {
         "sourceType": "module"
     },
     "rules": {
-      "no-param-reassign": 0,
       "import/extensions": 0,
       "no-multi-assign": 0,
       "no-plusplus": 0,

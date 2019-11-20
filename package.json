@@ -17,7 +17,7 @@
     "build": "npm run clear -s && webpack --progress",
     "lint": "eslint ./**/*.js",
     "clear": "del-cli dist",
-    "deploy": "surge dist fancy-weather.surge.sh"
+    "deploy": "surge dist fancy-weather-lsk.surge.sh"
   },
   "devDependencies": {
     "@babel/core": "^7.6.0",
