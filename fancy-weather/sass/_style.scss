@@ -1,0 +1,47 @@
+body {
+  width: 100wh;
+  height: 100vh;
+
+  background: url(../assets/bg-default.png) no-repeat center center fixed;
+  background-size: cover;
+
+  @include marginCollapseFix;
+}
+
+.button {
+  width: 4.4rem;
+  height: 4.4rem;
+
+  @include flexCenter;
+
+  background: $color-grey-transp;
+  border-radius: .5rem;
+
+  font-size: 1.4rem;
+
+  &--dark {
+    background: $color-grey-transp-dark;
+    color: $color-white-transp;
+  }
+
+  &--update {
+    background: $color-grey-transp url(../assets/update-button.svg) no-repeat center bottom;
+    background-size: 4.4rem;
+  }
+}
+
+.spinner {
+  width: 2rem;
+  height: 2rem;
+
+  background: url(../assets/spinner.svg) center no-repeat;
+
+  transition: all .1s;
+}
+
+.button-cluster {
+  display: flex;
+  gap: 1rem;
+
+  margin: 4rem 6vw;
+}

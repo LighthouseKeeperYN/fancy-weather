@@ -1,14 +1,18 @@
 // ABSTRACTS
 
-$font-main: 'Roboto', Tahoma, sans-serif;
+$font-main: 'Montserrat',
+tahoma,
+sans-serif;
 
 $font-size-title: 2rem;
 $font-size-normal: 1.6rem;
 
-$color-black-o: rgba(0, 0, 0, 0.87);
-$color-black-o-light: rgba(0, 0, 0, 0.541327);
 $color-bg: #e5e5e5;
+$color-black: rgb(0, 0, 0);
 $color-white: #fff;
+$color-white-transp: rgba(255, 255, 255, 0.4);
+$color-grey-transp: rgba(180, 184, 187, 0.4);
+$color-grey-transp-dark: rgba(76, 82, 85, 0.4);
 
 @mixin clearfix {
   &::after {
@@ -33,6 +37,12 @@ $color-white: #fff;
 @mixin flexColumn {
   display: flex;
   flex-direction: column;
+  align-items: center;
+}
+
+@mixin flexCenter {
+  display: flex;
+  justify-content: center;
   align-items: center;
 }
 
@@ -93,15 +103,15 @@ body {
   background-color: $color-bg;
 
   font-family: $font-main;
-  color: $color-black-o-light;
+  color: $color-black;
   font-size: $font-size-normal;
 }
 
 h1 {
   margin: 0;
-  
+
   font-size: $font-size-title;
-  color: $color-black-o;
+  color: $color-black;
 }
 
 ul {
