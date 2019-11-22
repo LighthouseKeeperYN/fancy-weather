@@ -4,7 +4,9 @@ import { updateButton } from './buttonUpdate';
 import { dateTime } from './dateTime';
 import { countryAndCity, map, coordinates } from './location';
 import { searchInput, searchInputButton } from './searchInput';
-import { temperatureToday, weatherIcon, weatherData, forecast } from './weather';
+import {
+  temperatureToday, weatherIcon, weatherDataList, forecast,
+} from './weather';
 
 const buttonCluster = document.createElement('div');
 buttonCluster.classList.add('button-cluster');
@@ -21,7 +23,7 @@ weatherDataCluster.appendChild(countryAndCity);
 weatherDataCluster.appendChild(dateTime);
 weatherDataCluster.appendChild(temperatureToday);
 weatherDataCluster.appendChild(weatherIcon);
-weatherDataCluster.appendChild(weatherData);
+weatherDataCluster.appendChild(weatherDataList);
 weatherDataCluster.appendChild(forecast[0]);
 weatherDataCluster.appendChild(forecast[1]);
 weatherDataCluster.appendChild(forecast[2]);

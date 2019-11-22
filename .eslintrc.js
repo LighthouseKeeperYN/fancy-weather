@@ -22,13 +22,15 @@ module.exports = {
       "no-plusplus": 0,
       "no-use-before-define": 0,
       "no-bitwise": 0,
+      "linebreak-style": 0,
+      "import/prefer-default-export": 0,
+      "global-require": 0,
       "no-constant-condition": [
         "error",
         {
           "checkLoops": false
         }
       ],
-      "prefer-destructuring": 0,
-      "no-alert": 0
+      "prefer-destructuring": 0
     }
 };

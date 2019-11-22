@@ -1,24 +1,15 @@
+import { apiKeys, settings } from './globals';
+import { getGeoData } from './location';
+
 export const temperatureToday = document.createElement('p');
 temperatureToday.classList.add('weather-data-cluster__temperature-today');
-temperatureToday.innerText = '10';
 
 export const weatherIcon = document.createElement('img');
 weatherIcon.classList.add('weather-data-cluster__weather-icon');
 weatherIcon.alt = 'Weather Icon';
-weatherIcon.src = require('../assets/weather-icons/cloudy.png');
 
-let weatherType = 'Overcast';
-let feelsLike = 'FeelsLike: 7°';
-let wind = 'Wind: 2 m/s';
-let humidity = 'Humidity: 83%';
-
-export const weatherData = document.createElement('div');
-weatherData.classList.add('weather-data-cluster__weather-data')
-weatherData.innerHTML =
-  `<p>${weatherType}</p>
-   <p>${feelsLike}</p>
-   <p>${wind}</p>
-   <p>${humidity}</p>`;
+export const weatherDataList = document.createElement('div');
+weatherDataList.classList.add('weather-data-cluster__weather-data');
 
 function createForecastNode(day, temperature, weather) {
   const wrapper = document.createElement('div');
@@ -47,7 +38,50 @@ function createForecastNode(day, temperature, weather) {
 export const forecast = [
   createForecastNode('Tuesday', '7°', 'whatever'),
   createForecastNode('Tuesday', '7°', 'whatever'),
-  createForecastNode('Tuesday', '7°', 'whatever')
+  createForecastNode('Tuesday', '7°', 'whatever'),
 ];
 
+class Weather {
+  constructor(apiKey, { latitude, longitude }, units, language) {
+    this.apiKey = apiKey;
+    this.latitude = latitude;
+    this.longitude = longitude;
+    this.units = units;
+    this.language = language;
+  }
 
+  async getWeather() {
+    const response = await fetch(`https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/${this.apiKey}/${this.latitude},${this.longitude}?lang=${this.language}&units=${this.units}`);
+    const responseData = await response.json();
+
+    return responseData
+  }
+
+  changeLocation({ latitude, longitude }) {
+    this.latitude = latitude;
+    this.longitude = longitude;
+  }
+}
+
+getGeoData(settings.location, apiKeys.location)
+  .then(coordinates => {
+    const weather = new Weather(apiKeys.weather, coordinates, settings.units, settings.language);
+    
+    weather.getWeather()
+      .then(function paintUI(weatherData) {
+        console.log(weatherData)
+        temperatureToday.innerText = Math.round(weatherData.currently.temperature);
+        weatherIcon.src = require(`../assets/weather-icons/${weatherData.currently.icon}.png`);
+        weatherDataList.innerHTML =`<p>${weatherData.currently.summary}</p>
+          <p>Feels Like: ${Math.round(weatherData.currently.apparentTemperature)}°</p>
+          <p>Wind: ${Math.round(weatherData.currently.windSpeed)} m/s</p>
+          <p>Humidity: ${weatherData.currently.humidity * 100}%</p>
+          `;
+
+      });
+  });
+
+// const weather = new Weather({ latitude: 52.1031542, longitude: 23.7321087 });
+// weather.getWeather()
+
+// // 52.1031542,23.7321087

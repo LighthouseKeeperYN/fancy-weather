@@ -15,7 +15,7 @@
   "scripts": {
     "watch": "webpack-dev-server --history-api-fallback --inline --progress --open",
     "build": "npm run clear -s && webpack --progress",
-    "lint": "eslint ./**/*.js",
+    "lint": "eslint --fix ./**/*.js",
     "clear": "del-cli dist",
     "deploy": "surge dist fancy-weather-lhk.surge.sh"
   },
