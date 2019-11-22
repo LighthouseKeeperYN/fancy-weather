@@ -1,11 +1,12 @@
 // ABSTRACTS
 
-$font-main: 'Montserrat',
-tahoma,
-sans-serif;
+$font-main: 'Montserrat', tahoma, sans-serif;
 
-$font-size-title: 2rem;
-$font-size-normal: 1.6rem;
+$font-size-small: 1.4rem;
+$font-size-normal: 2.2rem;
+$font-size-large: 4.4rem;
+$font-size-very-large: 8rem;
+$font-size-extra-large: 30.6rem;
 
 $color-bg: #e5e5e5;
 $color-black: rgb(0, 0, 0);
@@ -13,6 +14,8 @@ $color-white: #fff;
 $color-white-transp: rgba(255, 255, 255, 0.4);
 $color-grey-transp: rgba(180, 184, 187, 0.4);
 $color-grey-transp-dark: rgba(76, 82, 85, 0.4);
+
+$martin-sides: 6vw;
 
 @mixin clearfix {
   &::after {
@@ -103,15 +106,14 @@ body {
   background-color: $color-bg;
 
   font-family: $font-main;
-  color: $color-black;
+  color: $color-white;
   font-size: $font-size-normal;
 }
 
 h1 {
   margin: 0;
 
-  font-size: $font-size-title;
-  color: $color-black;
+  font-size: $font-size-large;
 }
 
 ul {
@@ -125,5 +127,9 @@ a {
 
 button {
   border: 0;
+  outline: 0;
   cursor: pointer;
+
+  &:-moz-focus-inner { border: 0; }
+  &:-moz-focusring { outline: 0; }
 }

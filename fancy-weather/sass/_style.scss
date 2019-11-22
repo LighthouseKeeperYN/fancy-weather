@@ -1,4 +1,6 @@
 body {
+  position: relative;
+
   width: 100wh;
   height: 100vh;
 
@@ -8,25 +10,47 @@ body {
   @include marginCollapseFix;
 }
 
+.button-cluster {
+  display: flex;
+
+  margin: 4rem $martin-sides;
+}
+
 .button {
   width: 4.4rem;
   height: 4.4rem;
 
   @include flexCenter;
 
-  background: $color-grey-transp;
   border-radius: .5rem;
+  margin-left: 1rem;
 
+  background: $color-grey-transp;
+
+  font-family: inherit;
   font-size: 1.4rem;
-
-  &--dark {
-    background: $color-grey-transp-dark;
-    color: $color-white-transp;
-  }
+  font-weight: bold;
+  color: $color-white;
+  text-transform: uppercase;
 
   &--update {
+    margin-left: 0;
+
     background: $color-grey-transp url(../assets/update-button.svg) no-repeat center bottom;
     background-size: 4.4rem;
+  }
+
+  &--language {
+    width: 7.1rem;
+  }
+
+  &--f {
+    border-radius: .5rem 0 0 .5rem;
+  }
+
+  &--c {
+    margin-left: 0;
+    border-radius: 0 .5rem .5rem 0;
   }
 }
 
@@ -39,9 +63,154 @@ body {
   transition: all .1s;
 }
 
-.button-cluster {
-  display: flex;
-  gap: 1rem;
+.arrow-down {
+  width: 1.3rem;
+  height: 1.3rem;
 
-  margin: 4rem 6vw;
+  margin-left: 1rem;
+
+  background: url(../assets/arrow-down.svg) center no-repeat;
+}
+
+.inactive {
+  background: $color-grey-transp-dark;
+
+  color: $color-white-transp;
+}
+
+.search-input {
+  width: 27.4rem;
+  height: 4.4rem;
+
+  margin-left: auto;
+  border: .1rem solid $color-grey-transp;
+  border-radius: .5rem 0 0 .5rem;
+  padding: 1.3rem 1.5rem;
+
+  background: $color-grey-transp-dark;
+
+  font-family: inherit;
+  font-size: $font-size-small;
+  color: $color-white;
+
+  &::placeholder {
+    font-size: $font-size-small;
+
+    opacity: 1;
+  }
+
+  &:focus::placeholder {
+    opacity: 0;
+  }
+
+  &__button {
+    width: 10rem;
+
+    margin-left: 0;
+    border-radius: 0 .5rem .5rem 0;
+  }
+}
+
+.weather-data-cluster {
+  margin-left: $martin-sides;
+
+  position: absolute;
+  top: 19%;
+
+  display: grid;
+  grid-template-columns: repeat(3, 21rem);
+  // grid-template-rows: repeat(3, 18rem);
+
+  text-transform: uppercase;
+  font-weight: bold;
+
+  &__location {
+    grid-column: 1 / 4;
+
+    font-size: $font-size-large;
+  }
+
+  &__date-time {
+    grid-column: 1 / 4;
+
+    margin-top: 1rem;
+
+    font-size: $font-size-normal;
+    text-transform: initial;
+    font-weight: initial;
+  }
+
+  &__temperature-today {
+    grid-column: 1 / 3;
+    grid-row: 3 / 5;
+
+    font-size: $font-size-extra-large;
+  }
+
+  &__weather-icon {
+    // grid-column: 3 / 3;
+    // grid-row: 3 / 3;
+
+    transform: translate(-50%, -25%);
+    // margin: -25% 0 0 -25%;
+
+    width: 17rem;
+    height: 17rem;
+  }
+
+  &__weather-data {
+    // grid-column: 3 / 3;
+    // grid-row: 4 / 4;
+
+    transform: translate(0, -25%);
+
+    &>:not(:last-child) {
+      margin-bottom: 1rem;
+    }
+  }
+}
+
+.forecast {
+  display: grid;
+
+  margin-right: 5rem;
+
+  &__day {
+    grid-column: 1 / 3;
+
+    font-size: $font-size-normal;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+
+  &__temperature {
+    font-size: $font-size-very-large;
+  }
+
+  &__icon {
+    width: 6.7rem;
+    height: 6.7rem;
+  }
+}
+
+.map-cluster {
+  position: absolute;
+  top: 27%;
+  right: $martin-sides;
+
+  &__map {
+    width: 37.5rem;
+    height: 37.5rem;
+    
+    border-radius: 5%;
+
+    background: white;
+  }
+
+  &__coordinates {
+    margin-top: 2rem;
+
+    font-size: $font-size-normal;
+    text-align: right;
+  }
 }

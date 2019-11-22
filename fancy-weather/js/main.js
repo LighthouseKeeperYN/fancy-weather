@@ -1,26 +1,4 @@
-import '../sass/main.scss';
-// import {
-//   moduleOne
-// } from './moduleOne';
-
-// const helloArr = require('./moduleOne.js');
-
-
 // console.log('API Key from Define Plugin:', API_KEY);
-
-// class TestClass {
-//   constructor() {
-//     const msg = "Using ES2015+ syntax";
-//     console.log(msg);
-//   }
-// }
-
-// let test = new TestClass();
-
-
-// // Пример массива
-// console.log(helloArr);
-
 
 // // Пример работы с глобальными переменными
 // if (APP_ENV === 'dev') {
@@ -28,11 +6,5 @@ import '../sass/main.scss';
 //   console.log("development hello!");
 // }
 
-
-// /* пример подключения модуля*/
-// let mod = moduleOne(2, 3);
-
-// console.log(mod);
-
+import '../sass/main.scss';
 import './domBuilder';
-
