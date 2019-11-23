@@ -17,15 +17,7 @@ coordinates.appendChild(latitude);
 coordinates.appendChild(longitude);
 
 
-export async function getGeoData(place, apiKey) {
-  const response = await fetch(`https://api.opencagedata.com/geocode/v1/json?q=${place}&key=${apiKey}&pretty=1&no_annotations=1`);
-  const responseData = await response.json();
 
-  return {
-    latitude: responseData.results[0].geometry.lat,
-    longitude: responseData.results[0].geometry.lng,
-  };
-}
 
 
 // export class GeoData {

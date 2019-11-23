@@ -1,5 +1,4 @@
-import { apiKeys, settings } from './globals';
-import { getGeoData } from './location';
+import { settings } from './globals';
 import { ConvertTime } from './utilities';
 
 export const dateTime = document.createElement('p');
@@ -68,49 +67,3 @@ export const forecast = new Forecast();
 forecast.createNode();
 forecast.createNode();
 forecast.createNode();
-
-class Weather {
-  constructor(apiKey, { latitude, longitude }, units, language) {
-    this.apiKey = apiKey;
-    this.latitude = latitude;
-    this.longitude = longitude;
-    this.units = units;
-    this.language = language;
-  }
-
-  async getWeatherData() {
-    const response = await fetch(`https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/${this.apiKey}/${this.latitude},${this.longitude}?lang=${this.language}&units=${this.units}`);
-    const responseData = await response.json();
-
-    return responseData;
-  }
-
-  changeLocation({ latitude, longitude }) {
-    this.latitude = latitude;
-    this.longitude = longitude;
-  }
-}
-
-export async function insertDataToUI() {
-  const coordinates = await getGeoData(settings.location, apiKeys.location);
-
-  const weather = new Weather(apiKeys.weather, coordinates, settings.units, settings.language);
-  const weatherData = await weather.getWeatherData();
-
-  const currentTime = new ConvertTime(new Date());
-  dateTime.innerText = `${currentTime.getDay()} ${currentTime.getDate()} ${currentTime.getMonth()} \xa0 ${currentTime.getTime()}`;
-
-  temperatureToday.innerText = Math.round(weatherData.currently.temperature);
-
-  weatherIcon.src = require(`../assets/weather-icons/${weatherData.currently.icon}.png`);
-
-  weatherIcon.alt = weatherData.currently.icon;
-
-  weatherDataList.innerHTML = `<p>${weatherData.currently.summary}</p>
-    <p>Feels Like: ${Math.round(weatherData.currently.apparentTemperature)}°</p>
-    <p>Wind: ${Math.round(weatherData.currently.windSpeed)} m/s</p>
-    <p>Humidity: ${weatherData.currently.humidity * 100}%</p>`;
-
-  forecast.insertWeatherData(weatherData);
-}
-insertDataToUI();
