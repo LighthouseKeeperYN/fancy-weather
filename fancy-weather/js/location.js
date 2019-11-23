@@ -1,4 +1,4 @@
-import { apiKeys, settings } from './globals';
+// import { apiKeys, settings } from './globals';
 
 export const countryAndCity = document.createElement('p');
 countryAndCity.classList.add('weather-data-cluster__location');
@@ -23,9 +23,9 @@ export async function getGeoData(place, apiKey) {
 
   return {
     latitude: responseData.results[0].geometry.lat,
-    longitude: responseData.results[0].geometry.lng
-  }
-};
+    longitude: responseData.results[0].geometry.lng,
+  };
+}
 
 
 // export class GeoData {
@@ -48,4 +48,3 @@ export async function getGeoData(place, apiKey) {
 
 // const getGeoData = new GeoData(224020);
 // getGeoData.getData().then( data => console.log(data));
-

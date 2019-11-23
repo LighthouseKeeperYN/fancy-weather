@@ -1,12 +1,11 @@
 import { languageButton } from './buttonLanguage';
 import { fahrenheitButton, celsiusButton } from './buttonTemperature';
 import { updateButton } from './buttonUpdate';
-import { dateTime } from './dateTime';
 import { countryAndCity, map, coordinates } from './location';
 import { searchInput, searchInputButton } from './searchInput';
 import {
-  temperatureToday, weatherIcon, weatherDataList, forecast,
-} from './weather';
+  dateTime, temperatureToday, weatherIcon, weatherDataList, forecast,
+} from './weatherTime';
 
 const buttonCluster = document.createElement('div');
 buttonCluster.classList.add('button-cluster');
@@ -24,10 +23,9 @@ weatherDataCluster.appendChild(dateTime);
 weatherDataCluster.appendChild(temperatureToday);
 weatherDataCluster.appendChild(weatherIcon);
 weatherDataCluster.appendChild(weatherDataList);
-weatherDataCluster.appendChild(forecast[0]);
-weatherDataCluster.appendChild(forecast[1]);
-weatherDataCluster.appendChild(forecast[2]);
-
+weatherDataCluster.appendChild(forecast.collection[0]);
+weatherDataCluster.appendChild(forecast.collection[1]);
+weatherDataCluster.appendChild(forecast.collection[2]);
 const mapCluster = document.createElement('div');
 mapCluster.classList.add('map-cluster');
 mapCluster.appendChild(map);
