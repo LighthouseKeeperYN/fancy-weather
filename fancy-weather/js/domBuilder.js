@@ -6,6 +6,8 @@ import { searchInput, searchInputButton } from './searchInput';
 import {
   dateTime, temperatureToday, weatherIcon, weatherDataList, forecast,
 } from './weatherTime';
+import { ui } from './ui';
+
 
 const buttonCluster = document.createElement('div');
 buttonCluster.classList.add('button-cluster');
@@ -35,3 +37,5 @@ mapCluster.appendChild(coordinates);
 document.body.appendChild(buttonCluster);
 document.body.appendChild(weatherDataCluster);
 document.body.appendChild(mapCluster);
+
+ui.drawUI();

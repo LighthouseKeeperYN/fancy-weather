@@ -15,12 +15,6 @@ const units = {
   imperial: 'us',
 };
 
-export const settings = {
-  language: languages.english,
-  units: units.imperial,
-  location: '224020',
-};
-
 export const dictionary = {
   latitude: {
     en: 'Latitude',
@@ -57,4 +51,10 @@ export const dictionary = {
     ru: 'Найти город или индекс',
     be: 'Знайсці горад ці індэкс',
   },
+};
+
+export let settings = {
+  language: languages.english,
+  units: units.si,
+  location: '224020',
 };

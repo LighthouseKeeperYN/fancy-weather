@@ -1,10 +1,8 @@
 export const countryAndCity = document.createElement('p');
 countryAndCity.classList.add('weather-data-cluster__location');
-countryAndCity.innerText = 'Minsk, Belarus';
 
 export const map = document.createElement('div');
 map.classList.add('map-cluster__map');
-map.id = 'map';
 
 export const mapIframe = document.createElement('iframe');
 mapIframe.classList.add('map-iframe');

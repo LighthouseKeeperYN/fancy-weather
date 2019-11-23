@@ -9,7 +9,7 @@ temperatureToday.classList.add('weather-data-cluster__temperature-today');
 
 export const weatherIcon = document.createElement('img');
 weatherIcon.classList.add('weather-data-cluster__weather-icon');
-weatherIcon.alt = 'Weather Icon';
+weatherIcon.alt = '\xa0';
 
 export const weatherDataList = document.createElement('div');
 weatherDataList.classList.add('weather-data-cluster__weather-data');
@@ -31,7 +31,7 @@ class Forecast {
 
     const weatherIconElement = document.createElement('img');
     weatherIconElement.classList.add('forecast__icon');
-    weatherIconElement.alt = 'Weather Icon';
+    weatherIconElement.alt = '\xa0';
 
     nodeWrapper.appendChild(dayElement);
     nodeWrapper.appendChild(temperatureElement);
