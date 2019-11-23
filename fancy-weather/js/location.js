@@ -4,6 +4,11 @@ countryAndCity.innerText = 'Minsk, Belarus';
 
 export const map = document.createElement('div');
 map.classList.add('map-cluster__map');
+map.id = 'map';
+
+export const mapIframe = document.createElement('iframe');
+mapIframe.classList.add('map-iframe');
+map.appendChild(mapIframe);
 
 export const coordinates = document.createElement('div');
 coordinates.classList.add('map-cluster__coordinates');

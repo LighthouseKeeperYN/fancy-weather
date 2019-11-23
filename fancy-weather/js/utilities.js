@@ -1,4 +1,4 @@
-export class FormatTime {
+export class TimeFormater {
   constructor(timeStamp, locale) {
     this.date = new Date(timeStamp);
     this.locale = locale;
@@ -13,4 +13,12 @@ export class FormatTime {
   getMonth() { return this.date.toLocaleDateString(this.locale, { month: 'long' }); }
 
   getTime() { return this.date.toTimeString().split(' ')[0].slice(0, 5); }
+}
+
+export function decimalToDegrees(decimal) {
+  const splitted = decimal.toString().split('.');
+  return {
+    degrees: splitted[0],
+    minutes: (splitted[1] / 60).toString(),
+  };
 }

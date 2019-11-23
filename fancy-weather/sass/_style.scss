@@ -118,7 +118,7 @@ body {
   top: 19%;
 
   display: grid;
-  grid-template-columns: repeat(3, 21rem);
+  grid-template-columns: repeat(3, 22rem);
   // grid-template-rows: repeat(3, 18rem);
 
   text-transform: uppercase;
@@ -163,7 +163,7 @@ body {
     // grid-column: 3 / 3;
     // grid-row: 4 / 4;
 
-    transform: translate(0, -25%);
+    transform: translate(0, -20%);
 
     &>:not(:last-child) {
       margin-bottom: 1rem;
@@ -205,7 +205,9 @@ body {
     
     border-radius: 5%;
 
-    background: white;
+    background: #e5e3df;
+
+    overflow: hidden;
   }
 
   &__coordinates {
@@ -214,4 +216,14 @@ body {
     font-size: $font-size-normal;
     text-align: right;
   }
+}
+
+.map-iframe {
+  width: 200%;
+  height: 200%;
+
+  transform: translate(-25%, -25%);
+
+  border: 0;
+  border-radius: 5%;
 }
