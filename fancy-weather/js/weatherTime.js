@@ -1,5 +1,5 @@
 import { settings } from './globals';
-import { ConvertTime } from './utilities';
+import { FormatTime } from './utilities';
 
 export const dateTime = document.createElement('p');
 dateTime.classList.add('weather-data-cluster__date-time');
@@ -44,7 +44,7 @@ class Forecast {
     const data = {};
 
     for (let i = 1; i <= this.collection.length; i++) {
-      const dayTime = new ConvertTime(weatherData.daily.data[i].time * 1000, settings.language);
+      const dayTime = new FormatTime(weatherData.daily.data[i].time * 1000, settings.language);
       data.day = dayTime.getFullDay();
       data.temperature = Math.round(weatherData.daily.data[i].temperatureHigh);
       data.icon = weatherData.daily.data[i].icon;

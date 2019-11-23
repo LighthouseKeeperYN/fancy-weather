@@ -7,9 +7,7 @@ map.classList.add('map-cluster__map');
 
 export const coordinates = document.createElement('div');
 coordinates.classList.add('map-cluster__coordinates');
-const latitude = document.createElement('p');
-const longitude = document.createElement('p');
-latitude.innerText = 'Latitude: 53°54\'';
-longitude.innerText = 'Longitude: 27°34\'';
+export const latitude = document.createElement('p');
+export const longitude = document.createElement('p');
 coordinates.appendChild(latitude);
 coordinates.appendChild(longitude);

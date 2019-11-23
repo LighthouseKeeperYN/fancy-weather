@@ -1,4 +1,4 @@
-export class ConvertTime {
+export class FormatTime {
   constructor(timeStamp, locale) {
     this.date = new Date(timeStamp);
     this.locale = locale;
