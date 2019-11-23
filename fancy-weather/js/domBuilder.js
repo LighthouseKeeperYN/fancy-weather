@@ -26,6 +26,7 @@ weatherDataCluster.appendChild(weatherDataList);
 weatherDataCluster.appendChild(forecast.collection[0]);
 weatherDataCluster.appendChild(forecast.collection[1]);
 weatherDataCluster.appendChild(forecast.collection[2]);
+
 const mapCluster = document.createElement('div');
 mapCluster.classList.add('map-cluster');
 mapCluster.appendChild(map);

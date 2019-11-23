@@ -4,7 +4,6 @@ import { ConvertTime } from './utilities';
 
 export const dateTime = document.createElement('p');
 dateTime.classList.add('weather-data-cluster__date-time');
-dateTime.innerText = 'Mon 28 October \xa0 17:23';
 
 export const temperatureToday = document.createElement('p');
 temperatureToday.classList.add('weather-data-cluster__temperature-today');
@@ -45,8 +44,8 @@ class Forecast {
   insertWeatherData(weatherData) {
     const data = {};
 
-    for (let i = 1; i < 4; i++) {
-      const dayTime = new ConvertTime(weatherData.daily.data[i].time * 1000);
+    for (let i = 1; i <= this.collection.length; i++) {
+      const dayTime = new ConvertTime(weatherData.daily.data[i].time * 1000, settings.language);
       data.day = dayTime.getFullDay();
       data.temperature = Math.round(weatherData.daily.data[i].temperatureHigh);
       data.icon = weatherData.daily.data[i].icon;
@@ -92,14 +91,19 @@ class Weather {
   }
 }
 
-async function insertDataToUI() {
+export async function insertDataToUI() {
   const coordinates = await getGeoData(settings.location, apiKeys.location);
 
   const weather = new Weather(apiKeys.weather, coordinates, settings.units, settings.language);
   const weatherData = await weather.getWeatherData();
 
+  const currentTime = new ConvertTime(new Date());
+  dateTime.innerText = `${currentTime.getDay()} ${currentTime.getDate()} ${currentTime.getMonth()} \xa0 ${currentTime.getTime()}`;
+
   temperatureToday.innerText = Math.round(weatherData.currently.temperature);
+
   weatherIcon.src = require(`../assets/weather-icons/${weatherData.currently.icon}.png`);
+
   weatherIcon.alt = weatherData.currently.icon;
 
   weatherDataList.innerHTML = `<p>${weatherData.currently.summary}</p>

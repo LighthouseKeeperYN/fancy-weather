@@ -12,5 +12,5 @@ export class ConvertTime {
 
   getMonth() { return this.date.toLocaleDateString(this.locale, { month: 'long' }); }
 
-  getTime() { return this.date.toLocaleDateString({ hourCycle: 'h24', hour: '2-digit', minute: '2-digit' }).slice(-5); }
+  getTime() { return this.date.toTimeString().split(' ')[0].slice(0, 5); }
 }
