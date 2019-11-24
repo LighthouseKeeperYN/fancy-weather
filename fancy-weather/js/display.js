@@ -1,6 +1,8 @@
-import { getWeatherData, getGeoData } from './fetch';
-import { apiKeys, settings, dictionary } from './globals';
-import { TimeFormater, decimalToDegrees } from './utilities';
+import { getWeatherData, getGeoData, getImageURL } from './fetch';
+import {
+  apiKeys, settings, dictionary, languages,
+} from './globals';
+import { TimeFormater, decimalToDegrees, bgImageTemplate } from './utilities';
 import {
   dateTime, temperatureToday, weatherIcon, weatherDataList, forecast,
 } from './weatherTime';
@@ -9,9 +11,11 @@ import {
 } from './location';
 
 class Display {
-  constructor(getWeatherDataFn, getGeoDataFn) {
+  constructor(getWeatherDataFn, getGeoDataFn, getImageURLFn, bgImageTemplateFn) {
     this.getWeatherData = getWeatherDataFn;
     this.getGeoData = getGeoDataFn;
+    this.getImageURL = getImageURLFn;
+    this.bgImageTemplate = bgImageTemplateFn;
   }
 
   updateTime() {
@@ -20,7 +24,7 @@ class Display {
   }
 
   initTimeUpdater() {
-    setInterval(() => { this.updateTime() }, (1000 * 60));
+    setInterval(() => { this.updateTime(); }, (1000 * 60));
   }
 
   insertDataToWeatherCluster(locationData, weatherData) {
@@ -50,6 +54,11 @@ class Display {
     longitude.innerText = `${dictionary.longitude[settings.language]}: ${this.lngDegrees.degrees}°${(this.lngDegrees.minutes).slice(0, 2)}'`;
   }
 
+  insertBG(imageURL) {
+    document.body.style.background = this.bgImageTemplate.getString(imageURL);
+    document.body.style.backgroundSize = 'cover';
+  }
+
   async getData() {
     const locationData = await this.getGeoData(
       settings.location,
@@ -67,24 +76,41 @@ class Display {
     return { locationData, weatherData };
   }
 
+  async getDataEn() {
+    const locationData = await this.getGeoData(
+      settings.location,
+      apiKeys.location,
+      languages.english,
+    );
+
+    const imageURL = await this.getImageURL(locationData, apiKeys.image);
+
+    return { locationData, imageURL };
+  }
+
   async drawWeather() {
     const data = await this.getData();
-
     this.insertDataToWeatherCluster(data.locationData, data.weatherData);
   }
 
   async drawMap() {
     const data = await this.getData();
-
     this.insertDataToMapCluster(data.locationData);
+  }
+
+  async updateBG() {
+    const dataEn = await this.getDataEn();
+
+    if (dataEn.imageURL) this.insertBG(dataEn.imageURL);
   }
 
   async drawEverything() {
     const data = await this.getData();
+    const dataEn = await this.getDataEn();
 
     this.insertDataToWeatherCluster(data.locationData, data.weatherData);
     this.insertDataToMapCluster(data.locationData, data.weatherData);
+    if (dataEn.imageURL) this.insertBG(dataEn.imageURL);
   }
-
 }
-export const display = new Display(getWeatherData, getGeoData);
+export const display = new Display(getWeatherData, getGeoData, getImageURL, bgImageTemplate);

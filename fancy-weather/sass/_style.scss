@@ -4,7 +4,7 @@ body {
   width: 100wh;
   height: 100vh;
 
-  background: url(../assets/bg-default.png) no-repeat center center fixed;
+  background: linear-gradient(180deg, rgba(8, 15, 26, 0.59) 0%, rgba(17, 17, 46, 0.46) 100%), url(../assets/bg-default.png) no-repeat center center fixed;
   background-size: cover;
 
   @include marginCollapseFix;
