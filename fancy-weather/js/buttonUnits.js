@@ -14,17 +14,17 @@ function toggleButtons() {
   celsiusButton.classList.toggle('inactive');
 }
 
-fahrenheitButton.addEventListener('click', e => {
+fahrenheitButton.addEventListener('click', () => {
   if (settings.units === units.si) {
     settings.units = units.imperial;
     display.drawWeather();
     toggleButtons();
   }
-})
-celsiusButton.addEventListener('click', e => {
+});
+celsiusButton.addEventListener('click', () => {
   if (settings.units === units.imperial) {
     settings.units = units.si;
     display.drawWeather();
     toggleButtons();
   }
-})
+});

@@ -9,16 +9,16 @@ import {
 } from './location';
 
 class Display {
-  constructor(getWeatherData, getGeoData) {
-    this.getWeatherData = getWeatherData,
-      this.getGeoData = getGeoData
+  constructor(getWeatherDataFn, getGeoDataFn) {
+    this.getWeatherData = getWeatherDataFn;
+    this.getGeoData = getGeoDataFn;
   }
 
   insertDataToWeatherCluster(locationData, weatherData) {
     countryAndCity.innerText = `${locationData.city}${locationData.city ? ', ' : ''}${locationData.country}`;
 
-    const currentTime = new TimeFormater(new Date(), settings.language);
-    dateTime.innerText = `${currentTime.getDay()} ${currentTime.getDate()} ${currentTime.getMonth()} \xa0 ${currentTime.getTime()}`;
+    this.currentTime = new TimeFormater(new Date(), settings.language);
+    dateTime.innerText = `${this.currentTime.getDay()} ${this.currentTime.getDate()} ${this.currentTime.getMonth()} \xa0 ${this.currentTime.getTime()}`;
 
     temperatureToday.innerText = Math.round(weatherData.currently.temperature);
 
@@ -36,10 +36,10 @@ class Display {
   insertDataToMapCluster(locationData) {
     mapIframe.src = `https://www.google.com/maps/embed/v1/view?center=${locationData.latitude},${locationData.longitude}&zoom=10&key=AIzaSyBWWZnqHV3asW7DM3yCQ0dxSHjj_J9LkwE&language=${settings.language}`;
 
-    const latDegrees = decimalToDegrees(locationData.latitude);
-    const lngDegrees = decimalToDegrees(locationData.longitude);
-    latitude.innerText = `${dictionary.latitude[settings.language]}: ${latDegrees.degrees}°${(latDegrees.minutes).slice(0, 2)}'`;
-    longitude.innerText = `${dictionary.longitude[settings.language]}: ${lngDegrees.degrees}°${(lngDegrees.minutes).slice(0, 2)}'`;
+    this.latDegrees = decimalToDegrees(locationData.latitude);
+    this.lngDegrees = decimalToDegrees(locationData.longitude);
+    latitude.innerText = `${dictionary.latitude[settings.language]}: ${this.latDegrees.degrees}°${(this.latDegrees.minutes).slice(0, 2)}'`;
+    longitude.innerText = `${dictionary.longitude[settings.language]}: ${this.lngDegrees.degrees}°${(this.lngDegrees.minutes).slice(0, 2)}'`;
   }
 
   async getData() {

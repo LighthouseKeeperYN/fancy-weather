@@ -1,4 +1,4 @@
-import { display } from './display'
+import { display } from './display';
 
 export const updateButton = document.createElement('button');
 updateButton.classList.add('button', 'button--update');

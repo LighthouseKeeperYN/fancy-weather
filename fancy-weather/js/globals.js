@@ -53,7 +53,7 @@ export const dictionary = {
   },
 };
 
-export let settings = {
+export const settings = {
   language: languages.russian,
   units: units.si,
   location: '224020',
