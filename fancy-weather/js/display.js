@@ -14,11 +14,19 @@ class Display {
     this.getGeoData = getGeoDataFn;
   }
 
+  updateTime() {
+    this.currentTime = new TimeFormater(new Date(), settings.language);
+    dateTime.innerText = `${this.currentTime.getDay()} ${this.currentTime.getDate()} ${this.currentTime.getMonth()} \xa0 ${this.currentTime.getTime()}`;
+  }
+
+  initTimeUpdater() {
+    setInterval(() => { this.updateTime() }, (1000 * 60));
+  }
+
   insertDataToWeatherCluster(locationData, weatherData) {
     countryAndCity.innerText = `${locationData.city}${locationData.city ? ', ' : ''}${locationData.country}`;
 
-    this.currentTime = new TimeFormater(new Date(), settings.language);
-    dateTime.innerText = `${this.currentTime.getDay()} ${this.currentTime.getDate()} ${this.currentTime.getMonth()} \xa0 ${this.currentTime.getTime()}`;
+    this.updateTime();
 
     temperatureToday.innerText = Math.round(weatherData.currently.temperature);
 
@@ -77,5 +85,6 @@ class Display {
     this.insertDataToWeatherCluster(data.locationData, data.weatherData);
     this.insertDataToMapCluster(data.locationData, data.weatherData);
   }
+
 }
 export const display = new Display(getWeatherData, getGeoData);

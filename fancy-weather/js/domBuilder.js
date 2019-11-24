@@ -39,3 +39,4 @@ document.body.appendChild(weatherDataCluster);
 document.body.appendChild(mapCluster);
 
 display.drawEverything();
+display.initTimeUpdater();

@@ -9,5 +9,5 @@ spinner.classList.add('spinner');
 updateButton.appendChild(spinner);
 
 updateButton.addEventListener('click', () => {
-  display.drawEverything();
+  display.drawWeather();
 });
