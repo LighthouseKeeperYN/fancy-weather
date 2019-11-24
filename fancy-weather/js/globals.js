@@ -55,9 +55,3 @@ export const dictionary = {
     be: 'Знайсці горад ці індэкс',
   },
 };
-
-export const settings = {
-  language: languages.russian,
-  units: units.si,
-  location: '224020',
-};

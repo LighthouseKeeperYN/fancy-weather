@@ -1,4 +1,5 @@
-import { settings, units } from './globals';
+import { settings } from './userData';
+import { units } from './globals';
 import { display } from './display';
 
 export const fahrenheitButton = document.createElement('button');

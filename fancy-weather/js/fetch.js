@@ -22,7 +22,7 @@ export async function getGeoData(place, apiKey, language) {
   };
 }
 
-export async function getImageURL(place, apiKeys) {
+export async function getImageURL(keywords, apiKeys) {
   // 'be9086c1bfd0184c596f85c05a39b58ada493c74d450982fcac8e0a158e3e139'
   // 'c39f7b7054728fbe1182c24abe50486c3b6e09c849fca3ecbb0b3800739af880'
   // 'ca999b90665246999a446def90692123897b8dbf2be71b2f6792a2d2222de873'
@@ -31,13 +31,12 @@ export async function getImageURL(place, apiKeys) {
   // '83dfa940e6a660199c7e7b4bf33902c1f04fc8e958272bd4308dcec97db1bfc3'
   // 'b51e5fc2fbb6592944435068a0affe25e1ed28d747e8eaa81aac6f4c1edbf958'
   // 'fb054b49efafb4854192d38db3d87f1b4211c2567587b8e3307614e8efda79ea'
-  console.log(place.city)
 
-  let key = 'fb054b49efafb4854192d38db3d87f1b4211c2567587b8e3307614e8efda79ea'
-  // let key = apiKeys.getKey();
-  let queryUrl = `https://api.unsplash.com/photos/random?query=urban,${place.city},${place.country}&client_id=${key}&orientation=landscape`;
+  // const key = 'fb054b49efafb4854192d38db3d87f1b4211c2567587b8e3307614e8efda79ea';
+  let key = apiKeys.getKey();
+  let queryUrl = `https://api.unsplash.com/photos/random?query=${keywords[0]},${keywords[1]},${keywords[2]}&client_id=${key}&orientation=landscape`;
 
-  console.log(`https://api.unsplash.com/photos/random?query=towm,${place.country},${place.city}&client_id=${key}&orientation=landscape`)
+  console.log(`https://api.unsplash.com/photos/random?query=${keywords[0]},${keywords[1]},${keywords[2]}&client_id=${key}&orientation=landscape`);
 
   async function returnData(res) {
     const responseData = await res.json();
@@ -46,13 +45,13 @@ export async function getImageURL(place, apiKeys) {
 
   let response = await fetch(queryUrl);
 
-  if (response.status === 403) return false;
+  // if (response.status === 403) return false;
 
-  // for (let i = 0; response.status === 403 || i < 4; i++) {
-  //   key = apiKeys.updateKey();
-  //   queryUrl = `https://api.unsplash.com/photos/random?query=town,${place.city}&client_id=${key}&orientation=landscape`;
-  //   response = await fetch(queryUrl);
-  // }
+  for (let i = 0; response.status === 403 && i < 8; i++) {
+    key = apiKeys.updateKey();
+    queryUrl = `https://api.unsplash.com/photos/random?query=${keywords[0]},${keywords[1]},${keywords[2]}&client_id=${key}&orientation=landscape`;
+    response = await fetch(queryUrl);
+  }
 
   // console.log(response);
 

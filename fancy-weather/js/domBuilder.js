@@ -1,4 +1,4 @@
-import { languageButton } from './buttonLanguage';
+import { languageMenu } from './menuLanguage';
 import { fahrenheitButton, celsiusButton } from './buttonUnits';
 import { updateButton } from './buttonUpdate';
 import { countryAndCity, map, coordinates } from './location';
@@ -8,11 +8,10 @@ import {
 } from './weatherTime';
 import { display } from './display';
 
-
 const buttonCluster = document.createElement('div');
 buttonCluster.classList.add('button-cluster');
 buttonCluster.appendChild(updateButton);
-buttonCluster.appendChild(languageButton);
+buttonCluster.appendChild(languageMenu);
 buttonCluster.appendChild(fahrenheitButton);
 buttonCluster.appendChild(celsiusButton);
 buttonCluster.appendChild(searchInput);

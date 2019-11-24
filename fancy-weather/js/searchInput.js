@@ -1,5 +1,6 @@
-import { settings, dictionary } from './globals';
+import { dictionary } from './globals';
 import { display } from './display';
+import { settings } from './userData';
 
 function processSearchQuery() {
   settings.location = searchInput.value;

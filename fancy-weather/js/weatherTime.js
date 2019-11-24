@@ -1,5 +1,5 @@
-import { settings } from './globals';
-import { TimeFormater } from './utilities';
+import { settings } from './userData';
+import { TimeFormatter } from './utilities';
 
 export const dateTime = document.createElement('p');
 dateTime.classList.add('weather-data-cluster__date-time');
@@ -19,32 +19,34 @@ class Forecast {
     this.collection = [];
   }
 
-  createNode() {
-    const nodeWrapper = document.createElement('div');
-    nodeWrapper.classList.add('forecast');
+  createNode(amount = 1) {
+    for (let i = 0; i < amount; i++) {
+      const nodeWrapper = document.createElement('div');
+      nodeWrapper.classList.add('forecast');
 
-    const dayElement = document.createElement('p');
-    dayElement.classList.add('forecast__day');
+      const dayElement = document.createElement('p');
+      dayElement.classList.add('forecast__day');
 
-    const temperatureElement = document.createElement('p');
-    temperatureElement.classList.add('forecast__temperature');
+      const temperatureElement = document.createElement('p');
+      temperatureElement.classList.add('forecast__temperature');
 
-    const weatherIconElement = document.createElement('img');
-    weatherIconElement.classList.add('forecast__icon');
-    weatherIconElement.alt = '\xa0';
+      const weatherIconElement = document.createElement('img');
+      weatherIconElement.classList.add('forecast__icon');
+      weatherIconElement.alt = '\xa0';
 
-    nodeWrapper.appendChild(dayElement);
-    nodeWrapper.appendChild(temperatureElement);
-    nodeWrapper.appendChild(weatherIconElement);
+      nodeWrapper.appendChild(dayElement);
+      nodeWrapper.appendChild(temperatureElement);
+      nodeWrapper.appendChild(weatherIconElement);
 
-    this.collection.push(nodeWrapper);
+      this.collection.push(nodeWrapper);
+    }
   }
 
   insertWeatherData(weatherData) {
     const data = {};
 
     for (let i = 1; i <= this.collection.length; i++) {
-      const dayTime = new TimeFormater(weatherData.daily.data[i].time * 1000, settings.language);
+      const dayTime = new TimeFormatter(weatherData.daily.data[i].time * 1000, settings.language);
       data.day = dayTime.getFullDay();
       data.temperature = Math.round(weatherData.daily.data[i].temperatureHigh);
       data.icon = weatherData.daily.data[i].icon;
@@ -64,6 +66,5 @@ class Forecast {
 }
 
 export const forecast = new Forecast();
-forecast.createNode();
-forecast.createNode();
-forecast.createNode();
+
+forecast.createNode(3)

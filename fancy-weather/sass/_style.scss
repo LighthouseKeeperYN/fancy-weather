@@ -1,3 +1,13 @@
+@keyframes smoothAppearance {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
 body {
   position: relative;
 
@@ -8,6 +18,8 @@ body {
   background-size: cover;
 
   @include marginCollapseFix;
+
+  animation: smoothAppearance 1s ease-in-out;
 }
 
 .button-cluster {
@@ -23,7 +35,6 @@ body {
   @include flexCenter;
 
   border-radius: .5rem;
-  margin-left: 1rem;
 
   background: $color-grey-transp;
 
@@ -40,17 +51,12 @@ body {
   }
 
   &--update {
-    margin-left: 0;
-
     background: $color-grey-transp url(../assets/update-button.svg) no-repeat center bottom;
     background-size: 4.4rem;
   }
 
-  &--language {
-    width: 7.1rem;
-  }
-
   &--f {
+    margin-left: 1rem;
     border-radius: .5rem 0 0 .5rem;
 
     cursor: initial;
@@ -61,7 +67,6 @@ body {
   }
 
   &--c {
-    margin-left: 0;
     border-radius: 0 .5rem .5rem 0;
 
     cursor: initial;
@@ -88,18 +93,6 @@ body {
   margin-left: 1rem;
 
   background: url(../assets/arrow-down.svg) center no-repeat;
-}
-
-.inactive {
-  background: $color-grey-transp-dark;
-
-  color: $color-white-transp;
-
-  cursor: pointer;
-
-  &:hover {
-    background-color: $color-grey;
-  }
 }
 
 .search-input {
@@ -226,8 +219,6 @@ body {
 
     border-radius: 5%;
 
-    background: #e5e3df;
-
     overflow: hidden;
   }
 
@@ -247,4 +238,62 @@ body {
 
   border: 0;
   border-radius: 5%;
+}
+
+.language-menu {
+  margin-left: 1rem;
+}
+
+
+.drop-down-menu {
+  position: relative;
+  z-index: 1;
+
+  max-height: 0;
+  overflow: hidden;
+  
+  transition: max-height .6s cubic-bezier(0.25, 0.46, 0.45, 0.94), border-radius .2s;
+
+  &--open {
+    max-height: 20rem;
+    height: auto;
+  }
+
+  &__face-button {
+    width: 7.1rem;
+
+    &--open {
+      border-radius: .5rem .5rem 0 0;
+    }
+  }
+
+
+  &__item {
+    width: 7.1rem;
+
+    border-radius: 0;
+
+    cursor: initial;
+
+    &:hover {
+      background-color: $color-grey-transp;
+    }
+
+    &:last-child {
+      border-radius: 0 0 .5rem .5rem;
+    }
+  }
+}
+
+.inactive {
+  background: $color-grey-transp-dark;
+
+  color: $color-white-transp;
+
+  cursor: pointer;
+
+  &:hover {
+    background-color: $color-grey;
+    color: $color-white;
+  }
 }
