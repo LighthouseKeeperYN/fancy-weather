@@ -1,4 +1,4 @@
 import '../sass/main.scss';
 
 import './domBuilder';
-import './ui';
+import './display';

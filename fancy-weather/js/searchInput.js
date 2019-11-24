@@ -1,9 +1,9 @@
 import { settings, dictionary } from './globals';
-import { ui } from './ui';
+import { display } from './display';
 
 function processSearchQuery() {
   settings.location = searchInput.value;
-  ui.drawUI();
+  display.drawEverything();
   searchInput.value = '';
   searchInput.blur();
 }

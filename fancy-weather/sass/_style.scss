@@ -33,6 +33,12 @@ body {
   color: $color-white;
   text-transform: uppercase;
 
+  transition: all .2s;
+
+  &:hover {
+    background-color: $color-grey;
+  }
+
   &--update {
     margin-left: 0;
 
@@ -199,7 +205,7 @@ body {
   &__map {
     width: 37.5rem;
     height: 37.5rem;
-    
+
     border-radius: 5%;
 
     background: #e5e3df;

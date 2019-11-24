@@ -1,12 +1,12 @@
 import { languageButton } from './buttonLanguage';
-import { fahrenheitButton, celsiusButton } from './buttonTemperature';
+import { fahrenheitButton, celsiusButton } from './buttonUnits';
 import { updateButton } from './buttonUpdate';
 import { countryAndCity, map, coordinates } from './location';
 import { searchInput, searchInputButton } from './searchInput';
 import {
   dateTime, temperatureToday, weatherIcon, weatherDataList, forecast,
 } from './weatherTime';
-import { ui } from './ui';
+import { display } from './display';
 
 
 const buttonCluster = document.createElement('div');
@@ -38,4 +38,4 @@ document.body.appendChild(buttonCluster);
 document.body.appendChild(weatherDataCluster);
 document.body.appendChild(mapCluster);
 
-ui.drawUI();
+display.drawEverything();

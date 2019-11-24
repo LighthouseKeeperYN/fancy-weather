@@ -10,7 +10,7 @@ const languages = {
   belarus: 'be',
 };
 
-const units = {
+export const units = {
   si: 'si',
   imperial: 'us',
 };
@@ -54,7 +54,7 @@ export const dictionary = {
 };
 
 export let settings = {
-  language: languages.english,
+  language: languages.russian,
   units: units.si,
   location: '224020',
 };
