@@ -41,7 +41,6 @@ languageButton.addEventListener('click', function openMenu() {
   menu.classList.toggle('drop-down-menu--open');
 
   languageButton.classList.toggle('drop-down-menu__face-button--open');
-  // languageButton.classList.toggle('drop-down-menu__face-button--close');
 });
 
 menu.addEventListener('click', function chooseLanguage(e) {

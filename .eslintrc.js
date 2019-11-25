@@ -17,8 +17,6 @@ module.exports = {
         "sourceType": "module"
     },
     "rules": {
-      "import/extensions": 0,
-      "no-multi-assign": 0,
       "no-plusplus": 0,
       "no-use-before-define": 0,
       "no-bitwise": 0,

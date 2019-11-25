@@ -15,6 +15,7 @@
   "scripts": {
     "watch": "webpack-dev-server --history-api-fallback --inline --progress --open",
     "build": "npm run clear -s && webpack --progress",
+    "build:quick": "webpack", 
     "lint": "eslint ./**/*.js",
     "lint:fix": "eslint --fix ./**/*.js",
     "clear": "del-cli dist",

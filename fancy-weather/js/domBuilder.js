@@ -8,14 +8,22 @@ import {
 } from './weatherTime';
 import { display } from './display';
 
+const leftSubCluster = document.createElement('div');
+leftSubCluster.classList.add('button-cluster__left-sub-cluster');
+leftSubCluster.appendChild(updateButton);
+leftSubCluster.appendChild(languageMenu);
+leftSubCluster.appendChild(fahrenheitButton);
+leftSubCluster.appendChild(celsiusButton);
+
+const rightSubCluster = document.createElement('div');
+rightSubCluster.classList.add('button-cluster__right-sub-cluster');
+rightSubCluster.appendChild(searchInput);
+rightSubCluster.appendChild(searchInputButton);
+
 const buttonCluster = document.createElement('div');
 buttonCluster.classList.add('button-cluster');
-buttonCluster.appendChild(updateButton);
-buttonCluster.appendChild(languageMenu);
-buttonCluster.appendChild(fahrenheitButton);
-buttonCluster.appendChild(celsiusButton);
-buttonCluster.appendChild(searchInput);
-buttonCluster.appendChild(searchInputButton);
+buttonCluster.appendChild(leftSubCluster);
+buttonCluster.appendChild(rightSubCluster);
 
 const weatherDataCluster = document.createElement('div');
 weatherDataCluster.classList.add('weather-data-cluster');
@@ -33,9 +41,13 @@ mapCluster.classList.add('map-cluster');
 mapCluster.appendChild(map);
 mapCluster.appendChild(coordinates);
 
+const mainWrapper = document.createElement('div');
+mainWrapper.classList.add('main-wrapper');
+mainWrapper.appendChild(weatherDataCluster);
+mainWrapper.appendChild(mapCluster);
+
 document.body.appendChild(buttonCluster);
-document.body.appendChild(weatherDataCluster);
-document.body.appendChild(mapCluster);
+document.body.appendChild(mainWrapper);
 
 display.drawEverything();
 display.initTimeUpdater();

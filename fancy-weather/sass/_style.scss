@@ -14,7 +14,8 @@ body {
   width: 100wh;
   height: 100vh;
 
-  background: linear-gradient(180deg, rgba(8, 15, 26, 0.59) 0%, rgba(17, 17, 46, 0.46) 100%), url(../assets/bg-default.png) no-repeat center center fixed;
+  background: linear-gradient(180deg, rgba(8, 15, 26, 0.59) 0%, rgba(17, 17, 46, 0.46) 100%) center center fixed,
+    url(../assets/bg-default.png) no-repeat center center fixed;
   background-size: cover;
 
   @include marginCollapseFix;
@@ -24,8 +25,37 @@ body {
 
 .button-cluster {
   display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
 
-  margin: 4rem $martin-sides;
+  margin: $margin-top-small 0;
+
+  @include respond(phone) {
+    justify-content: center;
+  }
+
+  &__left-sub-cluster {
+    display: flex;
+
+    margin-left: $martin-sides;
+    margin-right: 2rem;
+
+    @include respond(phone) {
+      order: 1;
+
+      margin: $margin-top-small 5rem 0;
+    }
+  }
+  &__right-sub-cluster {
+    display: flex;
+
+    margin-right: $martin-sides;
+    margin-left: 2rem;
+
+    @include respond(phone) {
+      margin: 0 5rem;
+    }
+  }
 }
 
 .button {
@@ -99,7 +129,6 @@ body {
   width: 27.4rem;
   height: 4.4rem;
 
-  margin-left: auto;
   border: .1rem solid $color-grey-transp;
   border-radius: .5rem 0 0 .5rem;
   padding: 1.3rem 1.5rem;
@@ -134,10 +163,10 @@ body {
 }
 
 .weather-data-cluster {
-  margin-left: $martin-sides;
+  // margin-left: $martin-sides;
 
-  position: absolute;
-  top: 19%;
+  // position: absolute;
+  // top: 19%;
 
   display: grid;
   grid-template-columns: repeat(3, 22rem);
@@ -145,10 +174,19 @@ body {
   text-transform: uppercase;
   font-weight: bold;
 
+  @include respond(phone) {
+    grid-template-columns: repeat(3, 10rem);
+    justify-content: center;
+  }
+
   &__location {
     grid-column: 1 / 4;
 
     font-size: $font-size-large;
+
+    @include respond(tab-port) {
+      text-align: center;
+    }
   }
 
   &__date-time {
@@ -159,6 +197,10 @@ body {
     font-size: $font-size-normal;
     text-transform: capitalize;
     font-weight: initial;
+
+    @include respond(tab-port) {
+      text-align: center;
+    }
   }
 
   &__temperature-today {
@@ -167,6 +209,10 @@ body {
 
     text-align: center;
     font-size: $font-size-extra-large;
+
+    @include respond(phone) {
+      grid-column: 1 / 4;
+    }
   }
 
   &__weather-icon {
@@ -174,6 +220,15 @@ body {
 
     width: 17rem;
     height: 17rem;
+
+    @include respond(tab-port) {
+      transform: translate(0, -10%);
+    }
+
+    @include respond(phone) {
+      grid-column: 1 / 4;
+      margin: 0 auto;
+    }
   }
 
   &__weather-data {
@@ -182,6 +237,17 @@ body {
     &>:not(:last-child) {
       margin-bottom: 1rem;
     }
+
+    @include respond(tab-port) {
+      transform: translate(0, -10%);
+    }
+
+    @include respond(phone) {
+      grid-column: 1 / 4;
+      justify-content: center;
+      text-align: center;
+      margin-top: 2rem;
+    }
   }
 }
 
@@ -189,6 +255,17 @@ body {
   display: grid;
 
   margin-right: 5rem;
+
+  @include respond(tab-port) {
+    margin: 0 2.5rem;
+  }
+
+  @include respond(phone) {
+    grid-column: 1 / 4;
+    justify-content: center;
+    text-align: center;
+    margin-top: 4rem;
+  }
 
   &__day {
     grid-column: 1 / 3;
@@ -209,9 +286,10 @@ body {
 }
 
 .map-cluster {
-  position: absolute;
-  top: 27%;
-  right: $martin-sides;
+
+  @include respond(tab-land) {
+    margin-top: $margin-top;
+  }
 
   &__map {
     width: 37.5rem;
@@ -241,18 +319,24 @@ body {
 }
 
 .language-menu {
+  position: relative;
+
   margin-left: 1rem;
 }
 
 
 .drop-down-menu {
-  position: relative;
+  position: absolute;
   z-index: 1;
 
   max-height: 0;
   overflow: hidden;
-  
+
   transition: max-height .6s cubic-bezier(0.25, 0.46, 0.45, 0.94), border-radius .2s;
+
+  @include respond(phone) {
+    position: relative;
+  }
 
   &--open {
     max-height: 20rem;
@@ -295,5 +379,20 @@ body {
   &:hover {
     background-color: $color-grey;
     color: $color-white;
+  }
+}
+
+.main-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+
+  margin: $margin-top $martin-sides 0;
+
+  @include respond(tab-land) {
+    justify-content: center;
+
+    margin-top: $margin-top-small;
   }
 }

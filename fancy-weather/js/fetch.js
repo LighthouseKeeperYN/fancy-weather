@@ -46,7 +46,7 @@ export async function getImageURL(keywords, apiKeys) {
   let response = await fetch(queryUrl);
 
   // if (response.status === 403) return false;
-
+  
   for (let i = 0; response.status === 403 && i < 8; i++) {
     key = apiKeys.updateKey();
     queryUrl = `https://api.unsplash.com/photos/random?query=${keywords[0]},${keywords[1]},${keywords[2]}&client_id=${key}&orientation=landscape`;

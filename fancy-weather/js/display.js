@@ -22,11 +22,6 @@ class Display {
     this.bgImageTemplate = bgImageTemplateFn;
   }
 
-  // triggerAnimation(element) {
-  //   element.style.animation = 'none';
-  //   setTimeout(() => element.style.animation = '');
-  // }
-
   updateTime() {
     this.currentTime = new TimeFormatter(new Date(), settings.language);
     dateTime.innerText = `${this.currentTime.getDay()} ${this.currentTime.getDate()} ${this.currentTime.getMonth()} \xa0 ${this.currentTime.getTime()}`;
@@ -55,8 +50,6 @@ class Display {
   }
 
   insertDataToMapCluster(locationData) {
-    // this.triggerAnimation(mapCluster);
-
     mapIframe.src = `https://www.google.com/maps/embed/v1/view?center=${locationData.latitude},${locationData.longitude}&zoom=10&key=AIzaSyBWWZnqHV3asW7DM3yCQ0dxSHjj_J9LkwE&language=${settings.language}`;
 
     this.latDegrees = decimalToDegrees(locationData.latitude);
@@ -65,7 +58,7 @@ class Display {
     longitude.innerText = `${dictionary.longitude[settings.language]}: ${this.lngDegrees.degrees}°${(this.lngDegrees.minutes).slice(0, 2)}'`;
   }
 
-  insertBG(imageURL) {
+  insertBGToBody(imageURL) {
     document.body.style.background = this.bgImageTemplate.getString(imageURL);
     document.body.style.backgroundSize = 'cover';
   }
@@ -108,14 +101,11 @@ class Display {
     keywords.push(dataEn.weatherData.currently.summary);
     const imageURL = await this.getImageURL(keywords, apiKeys.image);
 
-    this.insertBG(imageURL);
+    this.insertBGToBody(imageURL);
   }
 
   async drawEverything() {
     const data = await this.getData(settings.language);
-
-
-    // body.classList.add('appearanceAnimation');
 
     this.drawSearchInput();
     this.insertDataToWeatherCluster(data.locationData, data.weatherData);
