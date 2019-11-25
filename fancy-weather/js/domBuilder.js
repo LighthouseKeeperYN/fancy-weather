@@ -1,53 +1,65 @@
 import { languageMenu } from './menuLanguage';
-import { fahrenheitButton, celsiusButton } from './buttonUnits';
-import { updateButton } from './buttonUpdate';
+import {
+  fahrenheitButton, celsiusButton, updateButton, searchInputButton,
+} from './buttons';
 import { countryAndCity, map, coordinates } from './location';
-import { searchInput, searchInputButton } from './searchInput';
+import { searchInput } from './searchInput';
 import {
   dateTime, temperatureToday, weatherIcon, weatherDataList, forecast,
 } from './weatherTime';
 import { display } from './display';
+import { settings } from './userData';
 
-const leftSubCluster = document.createElement('div');
-leftSubCluster.classList.add('button-cluster__left-sub-cluster');
-leftSubCluster.appendChild(updateButton);
-leftSubCluster.appendChild(languageMenu);
-leftSubCluster.appendChild(fahrenheitButton);
-leftSubCluster.appendChild(celsiusButton);
+async function buildDom() {
+  await settings.downloadUserData();
 
-const rightSubCluster = document.createElement('div');
-rightSubCluster.classList.add('button-cluster__right-sub-cluster');
-rightSubCluster.appendChild(searchInput);
-rightSubCluster.appendChild(searchInputButton);
+  const leftSubCluster = document.createElement('div');
+  leftSubCluster.classList.add('button-cluster__left-sub-cluster');
+  leftSubCluster.appendChild(updateButton);
+  leftSubCluster.appendChild(languageMenu);
+  leftSubCluster.appendChild(fahrenheitButton);
+  leftSubCluster.appendChild(celsiusButton);
 
-const buttonCluster = document.createElement('div');
-buttonCluster.classList.add('button-cluster');
-buttonCluster.appendChild(leftSubCluster);
-buttonCluster.appendChild(rightSubCluster);
+  const rightSubCluster = document.createElement('div');
+  rightSubCluster.classList.add('button-cluster__right-sub-cluster');
+  rightSubCluster.appendChild(searchInput);
+  rightSubCluster.appendChild(searchInputButton);
 
-const weatherDataCluster = document.createElement('div');
-weatherDataCluster.classList.add('weather-data-cluster');
-weatherDataCluster.appendChild(countryAndCity);
-weatherDataCluster.appendChild(dateTime);
-weatherDataCluster.appendChild(temperatureToday);
-weatherDataCluster.appendChild(weatherIcon);
-weatherDataCluster.appendChild(weatherDataList);
-weatherDataCluster.appendChild(forecast.collection[0]);
-weatherDataCluster.appendChild(forecast.collection[1]);
-weatherDataCluster.appendChild(forecast.collection[2]);
+  const buttonCluster = document.createElement('div');
+  buttonCluster.classList.add('button-cluster');
+  buttonCluster.appendChild(leftSubCluster);
+  buttonCluster.appendChild(rightSubCluster);
 
-const mapCluster = document.createElement('div');
-mapCluster.classList.add('map-cluster');
-mapCluster.appendChild(map);
-mapCluster.appendChild(coordinates);
+  const weatherDataCluster = document.createElement('div');
+  weatherDataCluster.classList.add('weather-data-cluster');
+  weatherDataCluster.appendChild(countryAndCity);
+  weatherDataCluster.appendChild(dateTime);
+  weatherDataCluster.appendChild(temperatureToday);
+  weatherDataCluster.appendChild(weatherIcon);
+  weatherDataCluster.appendChild(weatherDataList);
+  weatherDataCluster.appendChild(forecast.collection[0]);
+  weatherDataCluster.appendChild(forecast.collection[1]);
+  weatherDataCluster.appendChild(forecast.collection[2]);
 
-const mainWrapper = document.createElement('div');
-mainWrapper.classList.add('main-wrapper');
-mainWrapper.appendChild(weatherDataCluster);
-mainWrapper.appendChild(mapCluster);
+  const mapCluster = document.createElement('div');
+  mapCluster.classList.add('map-cluster');
+  mapCluster.appendChild(map);
+  mapCluster.appendChild(coordinates);
 
-document.body.appendChild(buttonCluster);
-document.body.appendChild(mainWrapper);
+  const mainWrapper = document.createElement('div');
+  mainWrapper.classList.add('main-wrapper');
+  mainWrapper.appendChild(weatherDataCluster);
+  mainWrapper.appendChild(mapCluster);
 
-display.drawEverything();
-display.initTimeUpdater();
+  document.body.appendChild(buttonCluster);
+  document.body.appendChild(mainWrapper);
+
+  display.drawEverything();
+  display.initTimeUpdater();
+
+  window.addEventListener('beforeunload', async () => {
+    await settings.uploadUserData();
+  });
+}
+
+buildDom();

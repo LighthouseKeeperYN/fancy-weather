@@ -15,12 +15,12 @@ body {
   height: 100vh;
 
   background: linear-gradient(180deg, rgba(8, 15, 26, 0.59) 0%, rgba(17, 17, 46, 0.46) 100%) center center fixed,
-    url(../assets/bg-default.png) no-repeat center center fixed;
+    url(../assets/bg-default.jpg) no-repeat center center fixed;
   background-size: cover;
 
   @include marginCollapseFix;
 
-  animation: smoothAppearance 1s ease-in-out;
+  animation: smoothAppearance 2s ease-in-out;
 }
 
 .button-cluster {
@@ -351,7 +351,6 @@ body {
     }
   }
 
-
   &__item {
     width: 7.1rem;
 
@@ -388,11 +387,9 @@ body {
   align-items: center;
   flex-wrap: wrap;
 
-  margin: $margin-top $martin-sides 0;
+  margin: 0 $martin-sides;
 
   @include respond(tab-land) {
     justify-content: center;
-
-    margin-top: $margin-top-small;
   }
 }

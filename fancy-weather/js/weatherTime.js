@@ -67,4 +67,4 @@ class Forecast {
 
 export const forecast = new Forecast();
 
-forecast.createNode(3)
+forecast.createNode(3);

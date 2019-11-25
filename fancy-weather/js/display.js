@@ -1,6 +1,6 @@
 import { getWeatherData, getGeoData, getImageURL } from './fetch';
 import {
-  apiKeys, dictionary, languages,
+  apiKeys, dictionary, languages, units,
 } from './globals';
 import {
   TimeFormatter, decimalToDegrees, bgImageTemplate, generateKeywords,
@@ -11,8 +11,10 @@ import {
 import {
   countryAndCity, latitude, longitude, mapIframe,
 } from './location';
-import { searchInput, searchInputButton } from './searchInput';
+import { searchInput } from './searchInput';
 import { settings } from './userData';
+import { searchInputButton, fahrenheitButton, celsiusButton } from './buttons';
+import { languageButtonText, menuItems } from './menuLanguage';
 
 class Display {
   constructor(getWeatherDataFn, getGeoDataFn, getImageURLFn, bgImageTemplateFn) {
@@ -85,6 +87,14 @@ class Display {
     searchInputButton.innerText = dictionary.search[settings.language];
   }
 
+  async drawButtons() {
+    languageButtonText.innerText = settings.language;
+    menuItems[settings.language].classList.remove('inactive');
+
+    if (settings.units === units.si) fahrenheitButton.classList.add('inactive');
+    else celsiusButton.classList.add('inactive');
+  }
+
   async drawWeather() {
     const data = await this.getData(settings.language);
     this.insertDataToWeatherCluster(data.locationData, data.weatherData);
@@ -107,6 +117,7 @@ class Display {
   async drawEverything() {
     const data = await this.getData(settings.language);
 
+    this.drawButtons();
     this.drawSearchInput();
     this.insertDataToWeatherCluster(data.locationData, data.weatherData);
     this.insertDataToMapCluster(data.locationData, data.weatherData);

@@ -2,7 +2,7 @@ import { dictionary } from './globals';
 import { display } from './display';
 import { settings } from './userData';
 
-function processSearchQuery() {
+export function processSearchQuery() {
   settings.location = searchInput.value;
   display.drawEverything();
   searchInput.value = '';
@@ -17,11 +17,4 @@ searchInput.required = true;
 searchInput.placeholder = dictionary.searchPlaceholder[settings.language];
 searchInput.addEventListener('keyup', (e) => {
   if (e.key === 'Enter') processSearchQuery();
-});
-
-export const searchInputButton = document.createElement('button');
-searchInputButton.classList.add('button', 'search-input__button');
-searchInputButton.innerText = dictionary.search[settings.language];
-searchInputButton.addEventListener('click', () => {
-  if (searchInput.value.length !== 0) processSearchQuery();
 });

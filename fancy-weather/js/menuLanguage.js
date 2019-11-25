@@ -1,5 +1,6 @@
 import { settings } from './userData';
 import { display } from './display';
+import { languages } from './globals';
 
 export const languageMenu = document.createElement('div');
 languageMenu.classList.add('language-menu');
@@ -8,8 +9,7 @@ const languageButton = document.createElement('button');
 languageButton.classList.add('button', 'drop-down-menu__face-button');
 languageMenu.appendChild(languageButton);
 
-const languageButtonText = document.createElement('span');
-languageButtonText.innerText = settings.language;
+export const languageButtonText = document.createElement('span');
 languageButton.appendChild(languageButtonText);
 
 const arrowDown = document.createElement('span');
@@ -19,36 +19,36 @@ languageButton.appendChild(arrowDown);
 const menu = document.createElement('div');
 menu.classList.add('drop-down-menu');
 
-const menuItems = {
-  en: document.createElement('button'),
-  ru: document.createElement('button'),
-  be: document.createElement('button')
+export const menuItems = {
+  [languages.english]: document.createElement('button'),
+  [languages.russian]: document.createElement('button'),
+  [languages.belarus]: document.createElement('button'),
 };
 
 Object.entries(menuItems).forEach(([key, item]) => {
   item.classList.add('drop-down-menu__item');
-  item.classList.add('button')
+  item.classList.add('button');
   item.classList.add('inactive');
+  // eslint-disable-next-line no-await-in-loop
   item.id = key;
   item.innerText = key;
   menu.appendChild(item);
 });
-menuItems.en.classList.remove('inactive');
 
 languageMenu.appendChild(menu);
 
-languageButton.addEventListener('click', function openMenu() {
+languageButton.addEventListener('click', () => {
   menu.classList.toggle('drop-down-menu--open');
 
   languageButton.classList.toggle('drop-down-menu__face-button--open');
 });
 
-menu.addEventListener('click', function chooseLanguage(e) {
+menu.addEventListener('click', (e) => {
   if (e.target.classList.contains('drop-down-menu__item')
     && e.target.classList.contains('inactive')) {
     settings.language = e.target.id;
 
-    Object.values(menuItems).forEach(item => {
+    Object.values(menuItems).forEach((item) => {
       item.classList.add('inactive');
     });
 
@@ -57,7 +57,7 @@ menu.addEventListener('click', function chooseLanguage(e) {
     languageButtonText.innerText = e.target.id;
 
     display.drawSearchInput();
-    display.drawMap()
+    display.drawMap();
     display.drawWeather();
   }
 });

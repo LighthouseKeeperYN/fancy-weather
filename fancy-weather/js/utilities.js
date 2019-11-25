@@ -53,7 +53,7 @@ export function decimalToDegrees(decimal) {
 }
 
 export const bgImageTemplate = {
-  template: 
+  template:
   ['linear-gradient(180deg, rgba(8, 15, 26, 0.59) 0%, rgba(17, 17, 46, 0.46) 100%) center center fixed, url(',
     ') no-repeat center center fixed',
   ],
@@ -67,7 +67,7 @@ export function generateKeywords() {
   const date = new Date();
   const month = date.getMonth();
   const hours = date.getHours();
-  let timeOfTheDay; 
+  let timeOfTheDay;
   let timeOfTheYear;
 
   if (month <= 2 || month === 11) timeOfTheYear = 'winter';
