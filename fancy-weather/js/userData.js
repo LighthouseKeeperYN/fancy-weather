@@ -1,21 +1,20 @@
-import { languages, units, apiKeys } from './globals';
+import * as GLOBALS from './globals';
 import { getIPInfo } from './fetch';
-
 
 class UserData {
   constructor() {
-    this.language = languages.english;
-    this.units = units.si;
+    this.language = GLOBALS.languages.english;
+    this.units = GLOBALS.units.si;
     this.location = 'Brest Belarus';
   }
 
   async downloadUserData() {
     try {
       this.localStorageData = JSON.parse(localStorage.getItem('fancy-weather-lhk'));
-      this.ipData = await getIPInfo(apiKeys.ip);
+      this.ipData = await getIPInfo(GLOBALS.apiKeys.ip);
 
-      this.language = this.localStorageData.language || languages.english;
-      this.units = this.localStorageData.units || units.si;
+      this.language = this.localStorageData.language || GLOBALS.languages.english;
+      this.units = this.localStorageData.units || GLOBALS.units.si;
       this.location = `${this.ipData.city || ''} ${this.ipData.country || this.ipData.region}`;
     } catch (err) {
       console.log(err);

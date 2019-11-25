@@ -1,5 +1,5 @@
-import { dictionary } from './globals';
 import { display } from './display';
+import * as GLOBALS from './globals';
 import { settings } from './userData';
 
 class Search {
@@ -9,11 +9,11 @@ class Search {
     this.field.type = 'search';
     this.field.name = 'search-city';
     this.field.required = true;
-    this.field.placeholder = dictionary.searchPlaceholder[settings.language];
+    this.field.placeholder = GLOBALS.dictionary.searchPlaceholder[settings.language];
 
     this.button = document.createElement('button');
     this.button.classList.add('button', 'search-input__button');
-    this.button.innerText = dictionary.search[settings.language];
+    this.button.innerText = GLOBALS.dictionary.search[settings.language];
 
     this.field.addEventListener('keyup', this.triggerSearchWithEnter);
     this.button.addEventListener('click', this.triggerSearchWithButton);
@@ -34,7 +34,7 @@ class Search {
     this.recognition.lang = settings.language;
     this.recognition.start();
     this.recognitionButton.style.display = 'none';
-    this.field.placeholder = dictionary.voiceSearchPlaceholder[settings.language];
+    this.field.placeholder = GLOBALS.dictionary.voiceSearchPlaceholder[settings.language];
     this.field.disabled = true;
   }
 
@@ -57,7 +57,7 @@ class Search {
     if (this.transcript.length) {
       this.field.value = this.transcript;
       this.processSearchQuery();
-      this.field.placeholder = dictionary.searchPlaceholder[settings.language];
+      this.field.placeholder = GLOBALS.dictionary.searchPlaceholder[settings.language];
       this.recognitionButton.style.display = 'block';
       this.field.disabled = false;
     }

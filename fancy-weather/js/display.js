@@ -1,20 +1,23 @@
-import { getWeatherData, getGeoData, getImageURL } from './fetch';
+import { fahrenheitButton, celsiusButton } from './buttons';
+import * as fetch from './fetch';
+import * as GLOBALS from './globals';
 import {
-  apiKeys, dictionary, languages, units,
-} from './globals';
-import {
-  TimeFormatter, decimalToDegrees, bgImageTemplate, generateKeywords,
-} from './utilities';
-import {
-  dateTime, temperatureToday, weatherIcon, weatherDataList, forecast,
-} from './weatherTime';
-import {
-  countryAndCity, latitude, longitude, mapIframe,
+  countryAndCity,
+  latitude,
+  longitude,
+  mapIframe,
 } from './location';
+import * as menuLanguage from './menuLanguage';
 import { search } from './search';
 import { settings } from './userData';
-import { fahrenheitButton, celsiusButton } from './buttons';
-import { languageButtonText, menuItems } from './menuLanguage';
+import * as utilities from './utilities';
+import {
+  dateTime,
+  temperatureToday,
+  weatherIcon,
+  weatherDataList,
+  forecast,
+} from './weatherTime';
 
 class Display {
   constructor(getWeatherDataFn, getGeoDataFn, getImageURLFn, bgImageTemplateFn) {
@@ -22,10 +25,12 @@ class Display {
     this.getGeoData = getGeoDataFn;
     this.getImageURL = getImageURLFn;
     this.bgImageTemplate = bgImageTemplateFn;
+    this.search = search;
+    this.menuLanguage = menuLanguage;
   }
 
   updateTime() {
-    this.currentTime = new TimeFormatter(new Date(), settings.language);
+    this.currentTime = new utilities.TimeFormatter(new Date(), settings.language);
     dateTime.innerText = `${this.currentTime.getDay()} ${this.currentTime.getDate()} ${this.currentTime.getMonth()} \xa0 ${this.currentTime.getTime()}`;
   }
 
@@ -44,9 +49,9 @@ class Display {
     weatherIcon.alt = weatherData.currently.icon;
 
     weatherDataList.innerHTML = `<p>${weatherData.currently.summary}</p>
-      <p>${dictionary.feelsLike[settings.language]}: ${Math.round(weatherData.currently.apparentTemperature)}°</p>
-      <p>${dictionary.wind[settings.language]}: ${Math.round(weatherData.currently.windSpeed)} ${settings.units === 'si' ? 'm/s' : 'mph'}</p>
-      <p>${dictionary.humidity[settings.language]}: ${Math.round(weatherData.currently.humidity * 100)}%</p>`;
+      <p>${GLOBALS.dictionary.feelsLike[settings.language]}: ${Math.round(weatherData.currently.apparentTemperature)}°</p>
+      <p>${GLOBALS.dictionary.wind[settings.language]}: ${Math.round(weatherData.currently.windSpeed)} ${settings.units === 'si' ? 'm/s' : 'mph'}</p>
+      <p>${GLOBALS.dictionary.humidity[settings.language]}: ${Math.round(weatherData.currently.humidity * 100)}%</p>`;
 
     forecast.insertWeatherData(weatherData);
   }
@@ -54,10 +59,10 @@ class Display {
   insertDataToMapCluster(locationData) {
     mapIframe.src = `https://www.google.com/maps/embed/v1/view?center=${locationData.latitude},${locationData.longitude}&zoom=10&key=AIzaSyBWWZnqHV3asW7DM3yCQ0dxSHjj_J9LkwE&language=${settings.language}`;
 
-    this.latDegrees = decimalToDegrees(locationData.latitude);
-    this.lngDegrees = decimalToDegrees(locationData.longitude);
-    latitude.innerText = `${dictionary.latitude[settings.language]}: ${this.latDegrees.degrees}°${(this.latDegrees.minutes).slice(0, 2)}'`;
-    longitude.innerText = `${dictionary.longitude[settings.language]}: ${this.lngDegrees.degrees}°${(this.lngDegrees.minutes).slice(0, 2)}'`;
+    this.latDegrees = utilities.decimalToDegrees(locationData.latitude);
+    this.lngDegrees = utilities.decimalToDegrees(locationData.longitude);
+    latitude.innerText = `${GLOBALS.dictionary.latitude[settings.language]}: ${this.latDegrees.degrees}°${(this.latDegrees.minutes).slice(0, 2)}'`;
+    longitude.innerText = `${GLOBALS.dictionary.longitude[settings.language]}: ${this.lngDegrees.degrees}°${(this.lngDegrees.minutes).slice(0, 2)}'`;
   }
 
   insertBGToBody(imageURL) {
@@ -68,12 +73,12 @@ class Display {
   async getData(language) {
     const locationData = await this.getGeoData(
       settings.location,
-      apiKeys.location,
+      GLOBALS.apiKeys.location,
       language,
     );
 
     const weatherData = await this.getWeatherData(
-      apiKeys.weather,
+      GLOBALS.apiKeys.weather,
       locationData,
       settings.units,
       language,
@@ -83,15 +88,15 @@ class Display {
   }
 
   drawSearchInput() {
-    search.field.placeholder = dictionary.searchPlaceholder[settings.language];
-    search.button.innerText = dictionary.search[settings.language];
+    this.search.field.placeholder = GLOBALS.dictionary.searchPlaceholder[settings.language];
+    this.search.button.innerText = GLOBALS.dictionary.search[settings.language];
   }
 
   async drawButtons() {
-    languageButtonText.innerText = settings.language;
-    menuItems[settings.language].classList.remove('inactive');
+    this.menuLanguage.languageButtonText.innerText = settings.language;
+    this.menuLanguage.menuItems[settings.language].classList.remove('inactive');
 
-    if (settings.units === units.si) fahrenheitButton.classList.add('inactive');
+    if (settings.units === GLOBALS.units.si) fahrenheitButton.classList.add('inactive');
     else celsiusButton.classList.add('inactive');
   }
 
@@ -106,10 +111,10 @@ class Display {
   }
 
   async drawBG() {
-    const dataEn = await this.getData(languages.english);
-    const keywords = generateKeywords();
+    const dataEn = await this.getData(GLOBALS.languages.english);
+    const keywords = utilities.generateKeywords();
     keywords.push(dataEn.weatherData.currently.summary);
-    const imageURL = await this.getImageURL(keywords, apiKeys.image);
+    const imageURL = await this.getImageURL(keywords, GLOBALS.apiKeys.image);
 
     this.insertBGToBody(imageURL);
   }
@@ -124,4 +129,9 @@ class Display {
     this.drawBG();
   }
 }
-export const display = new Display(getWeatherData, getGeoData, getImageURL, bgImageTemplate);
+export const display = new Display(
+  fetch.getWeatherData,
+  fetch.getGeoData,
+  fetch.getImageURL,
+  utilities.bgImageTemplate,
+);

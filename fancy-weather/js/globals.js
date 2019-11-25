@@ -1,11 +1,11 @@
-import { imageApiKeySwitcher } from './utilities';
+import * as utilities from './utilities';
 
 export const apiKeys = {
   weather: '43ca44b17c4017837e555b7a2fddd02d',
   location: 'dfcea8096a95496ba653f501109c66bf',
   map: 'AIzaSyBWWZnqHV3asW7DM3yCQ0dxSHjj_J9LkwE',
   ip: 'd4c758d211e7c9',
-  image: imageApiKeySwitcher,
+  image: utilities.imageApiKeySwitcher,
 };
 
 export const languages = {
@@ -13,11 +13,6 @@ export const languages = {
   russian: 'ru',
   belarus: 'be',
 };
-
-// export const recognitionLanguages = {
-//   en: 'en-US',
-//   ru:
-// }
 
 export const units = {
   si: 'si',
@@ -64,5 +59,5 @@ export const dictionary = {
     en: 'What place do you want to find?',
     ru: 'Какое место вы хотите найти?',
     be: 'Якое месца вы хочаце знайсці?',
-  }
+  },
 };

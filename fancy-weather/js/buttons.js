@@ -1,6 +1,6 @@
-import { settings } from './userData';
-import { units } from './globals';
 import { display } from './display';
+import * as GLOBALS from './globals';
+import { settings } from './userData';
 
 function toggleButtons() {
   fahrenheitButton.classList.toggle('inactive');
@@ -22,17 +22,16 @@ export const celsiusButton = document.createElement('button');
 celsiusButton.classList.add('button', 'button--c');
 celsiusButton.innerText = '°C';
 
-
 fahrenheitButton.addEventListener('click', () => {
-  if (settings.units === units.si) {
-    settings.units = units.imperial;
+  if (settings.units === GLOBALS.units.si) {
+    settings.units = GLOBALS.units.imperial;
     display.drawWeather();
     toggleButtons();
   }
 });
 celsiusButton.addEventListener('click', () => {
-  if (settings.units === units.imperial) {
-    settings.units = units.si;
+  if (settings.units === GLOBALS.units.imperial) {
+    settings.units = GLOBALS.units.si;
     display.drawWeather();
     toggleButtons();
   }

@@ -1,5 +1,5 @@
 import { settings } from './userData';
-import { TimeFormatter } from './utilities';
+import * as utilities from './utilities';
 
 export const dateTime = document.createElement('p');
 dateTime.classList.add('weather-data-cluster__date-time');
@@ -46,7 +46,7 @@ class Forecast {
     const data = {};
 
     for (let i = 1; i <= this.collection.length; i++) {
-      const dayTime = new TimeFormatter(weatherData.daily.data[i].time * 1000, settings.language);
+      const dayTime = new utilities.TimeFormatter(weatherData.daily.data[i].time * 1000, settings.language);
       data.day = dayTime.getFullDay();
       data.temperature = Math.round(weatherData.daily.data[i].temperatureHigh);
       data.icon = weatherData.daily.data[i].icon;

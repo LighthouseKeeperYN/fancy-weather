@@ -1,14 +1,24 @@
-import { languageMenu } from './menuLanguage';
 import {
-  fahrenheitButton, celsiusButton, updateButton,
+  fahrenheitButton,
+  celsiusButton,
+  updateButton,
 } from './buttons';
-import { countryAndCity, map, coordinates } from './location';
-import { search } from './search';
-import {
-  dateTime, temperatureToday, weatherIcon, weatherDataList, forecast,
-} from './weatherTime';
 import { display } from './display';
+import {
+  countryAndCity,
+  map,
+  coordinates,
+} from './location';
+import { languageMenu } from './menuLanguage';
+import { search } from './search';
 import { settings } from './userData';
+import {
+  dateTime,
+  temperatureToday,
+  weatherIcon,
+  weatherDataList,
+  forecast,
+} from './weatherTime';
 
 async function buildDom() {
   await settings.downloadUserData();

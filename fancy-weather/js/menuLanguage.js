@@ -1,6 +1,6 @@
-import { settings } from './userData';
 import { display } from './display';
-import { languages } from './globals';
+import * as GLOBALS from './globals';
+import { settings } from './userData';
 
 export const languageMenu = document.createElement('div');
 languageMenu.classList.add('language-menu');
@@ -20,9 +20,9 @@ const menu = document.createElement('div');
 menu.classList.add('drop-down-menu');
 
 export const menuItems = {
-  [languages.english]: document.createElement('button'),
-  [languages.russian]: document.createElement('button'),
-  [languages.belarus]: document.createElement('button'),
+  [GLOBALS.languages.english]: document.createElement('button'),
+  [GLOBALS.languages.russian]: document.createElement('button'),
+  [GLOBALS.languages.belarus]: document.createElement('button'),
 };
 
 Object.entries(menuItems).forEach(([key, item]) => {
