@@ -22,10 +22,10 @@ class Search {
     this.recognitionButton.classList.add('search-input__voice-button');
     this.recognitionButton.addEventListener('click', this.triggerVoiceSearchWithButton);
 
-    this.recognition = new (window.speechRecognition || window.webkitSpeechRecognition)();
-    this.recognition.interimResults = true;
-    this.recognition.addEventListener('result', this.getTranscript);
-    this.recognition.addEventListener('end', this.voiceInputToSearchField);
+    // this.recognition = new (window.speechRecognition || window.webkitSpeechRecognition)();
+    // this.recognition.interimResults = true;
+    // this.recognition.addEventListener('result', this.getTranscript);
+    // this.recognition.addEventListener('end', this.voiceInputToSearchField);
 
     this.transcript = '';
   }
