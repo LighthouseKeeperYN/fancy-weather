@@ -8,6 +8,12 @@ function toggleButtons() {
   celsiusButton.classList.toggle('inactive');
 }
 
+function triggerAnimation(el) {
+  el.style.animation = 'none';
+  el.offsetHeight;
+  el.style.animation = null; 
+}
+
 export const fahrenheitButton = document.createElement('button');
 fahrenheitButton.classList.add('button', 'button--f');
 fahrenheitButton.innerText = '°F';
@@ -41,6 +47,7 @@ spinner.classList.add('spinner');
 updateButton.appendChild(spinner);
 
 updateButton.addEventListener('click', () => {
+  triggerAnimation(spinner);
   display.drawBG();
 });
 

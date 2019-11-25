@@ -30,7 +30,7 @@ class Display {
   }
 
   initTimeUpdater() {
-    setInterval(() => { this.updateTime(); }, (1000 * 60));
+    // setInterval(() => { this.updateTime(); }, (1000 * 60));
   }
 
   insertDataToWeatherCluster(locationData, weatherData) {
