@@ -2,44 +2,6 @@ import { dictionary } from './globals';
 import { display } from './display';
 import { settings } from './userData';
 
-// export function processSearchQuery() {
-//   settings.location = searchInput.value;
-//   display.drawEverything();
-//   searchInput.value = '';
-//   searchInput.blur();
-// }
-
-// export const searchInput = document.createElement('input');
-// searchInput.classList.add('search-input');
-// searchInput.type = 'search';
-// searchInput.name = 'search-city';
-// searchInput.required = true;
-// searchInput.placeholder = dictionary.searchPlaceholder[settings.language];
-// searchInput.addEventListener('keyup', (e) => {
-//   if (e.key === 'Enter') processSearchQuery();
-// });
-
-// const SpeechRecognition = window.speechRecognition || window.webkitSpeechRecognition;
-// console.log('WWWWWWWWWWWWWWWWWWWWWWWWWWW')
-// export const recognition = new SpeechRecognition();
-// recognition.interimResults = true;
-// recognition.lang = settings.language;
-
-// let transcript;
-
-// recognition.addEventListener('result', function getTranscript(e) {
-//   transcript = Array.from(e.results)
-//     .map(result => result[0])
-//     .map(result => result.transcript)
-//     .join('');
-//   console.log(transcript);
-// });
-
-// recognition.addEventListener('end', function inputToSearchField() {
-//   searchInput.value = transcript;
-//   processSearchQuery();
-// });
-
 class Search {
   constructor() {
     this.field = document.createElement('input');
@@ -56,14 +18,24 @@ class Search {
     this.field.addEventListener('keyup', this.triggerSearchWithEnter);
     this.button.addEventListener('click', this.triggerSearchWithButton);
 
+    this.recognitionButton = document.createElement('button');
+    this.recognitionButton.classList.add('search-input__voice-button');
+    this.recognitionButton.addEventListener('click', this.triggerVoiceSearchWithButton);
 
-    // this.recognition = new (window.speechRecognition || window.webkitSpeechRecognition)();
-    // this.recognition.interimResults = true;
-    // this.recognition.lang = settings.language;
-    // this.recognition.addEventListener('result', this.getTranscript);
-    // this.recognition.addEventListener('end', this.fieldToSearchField);
+    this.recognition = new (window.speechRecognition || window.webkitSpeechRecognition)();
+    this.recognition.interimResults = true;
+    this.recognition.addEventListener('result', this.getTranscript);
+    this.recognition.addEventListener('end', this.voiceInputToSearchField);
 
-    // this.transcript = '';
+    this.transcript = '';
+  }
+
+  triggerVoiceSearchWithButton = () => {
+    this.recognition.lang = settings.language;
+    this.recognition.start();
+    this.recognitionButton.style.display = 'none';
+    this.field.placeholder = dictionary.voiceSearchPlaceholder[settings.language];
+    this.field.disabled = true;
   }
 
   triggerSearchWithButton = () => {
@@ -79,12 +51,16 @@ class Search {
       .map((result) => result[0])
       .map((result) => result.transcript)
       .join('');
-    console.log(this.transcript);
   }
 
-  inputToSearchField = () => {
-    this.input.value = this.transcript;
-    this.processSearchQuery();
+  voiceInputToSearchField = () => {
+    if (this.transcript.length) {
+      this.field.value = this.transcript;
+      this.processSearchQuery();
+      this.field.placeholder = dictionary.searchPlaceholder[settings.language];
+      this.recognitionButton.style.display = 'block';
+      this.field.disabled = false;
+    }
   }
 
   processSearchQuery = () => {

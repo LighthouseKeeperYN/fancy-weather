@@ -60,4 +60,9 @@ export const dictionary = {
     ru: 'Найти город или индекс',
     be: 'Знайсці горад ці індэкс',
   },
+  voiceSearchPlaceholder: {
+    en: 'What place do you want to find?',
+    ru: 'Какое место вы хотите найти?',
+    be: 'Якое месца вы хочаце знайсці?',
+  }
 };

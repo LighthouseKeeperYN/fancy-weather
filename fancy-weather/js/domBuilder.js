@@ -24,6 +24,7 @@ async function buildDom() {
   rightSubCluster.classList.add('button-cluster__right-sub-cluster');
   rightSubCluster.appendChild(search.field);
   rightSubCluster.appendChild(search.button);
+  rightSubCluster.appendChild(search.recognitionButton);
 
   const buttonCluster = document.createElement('div');
   buttonCluster.classList.add('button-cluster');
