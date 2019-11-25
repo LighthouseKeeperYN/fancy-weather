@@ -14,12 +14,16 @@ export class TimeFormatter {
   getMonth() { return this.date.toLocaleDateString(this.locale, { month: 'long', timeZone: this.timeZone }); }
 
   getTime() {
-    return this.date.toLocaleDateString(this.locale, {
+    return this.date.toLocaleDateString('ru', {
       hour: '2-digit',
       minute: '2-digit',
       timeZone: this.timeZone
     })
       .split(' ')[1];
+  }
+
+  getHours() {
+    return this.getTime().split(':')[0];
   }
 }
 
