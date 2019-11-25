@@ -46,9 +46,13 @@ class Forecast {
     const data = {};
 
     for (let i = 1; i <= this.collection.length; i++) {
-      const dayTime = new utilities.TimeFormatter(weatherData.daily.data[i].time * 1000, settings.language);
+      const dayTime = new utilities.TimeFormatter(
+        weatherData.daily.data[i].time * 1000, settings.language,
+      );
       data.day = dayTime.getFullDay();
-      data.temperature = Math.round(weatherData.daily.data[i].temperatureHigh);
+      data.temperature = Math.round(
+        (weatherData.daily.data[i].temperatureHigh + weatherData.daily.data[i].temperatureLow) / 2,
+      );
       data.icon = weatherData.daily.data[i].icon;
 
       this.updateNode(i - 1, data);

@@ -29,8 +29,8 @@ class Display {
     this.menuLanguage = menuLanguage;
   }
 
-  updateTime() {
-    this.currentTime = new utilities.TimeFormatter(new Date(), settings.language);
+  updateTime(weatherData) {
+    this.currentTime = new utilities.TimeFormatter(new Date(), settings.language, weatherData.timezone);
     dateTime.innerText = `${this.currentTime.getDay()} ${this.currentTime.getDate()} ${this.currentTime.getMonth()} \xa0 ${this.currentTime.getTime()}`;
   }
 
@@ -41,7 +41,7 @@ class Display {
   insertDataToWeatherCluster(locationData, weatherData) {
     countryAndCity.innerText = `${locationData.city}${locationData.city ? ', ' : ''}${locationData.country}`;
 
-    this.updateTime();
+    this.updateTime(weatherData);
 
     temperatureToday.innerText = Math.round(weatherData.currently.temperature);
 
@@ -112,7 +112,12 @@ class Display {
 
   async drawBG() {
     const dataEn = await this.getData(GLOBALS.languages.english);
-    const keywords = utilities.generateKeywords();
+
+    const timeFormatter = new utilities.TimeFormatter(new Date(), 'ru', dataEn.weatherData.timezone);
+    const month = timeFormatter.getMonth();
+    const hours = timeFormatter.getHours();
+
+    const keywords = utilities.generateKeywords(month, hours);
     keywords.push(dataEn.weatherData.currently.summary);
     const imageURL = await this.getImageURL(keywords, GLOBALS.apiKeys.image);
 

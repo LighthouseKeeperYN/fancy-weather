@@ -1,18 +1,26 @@
 export class TimeFormatter {
-  constructor(timeStamp, locale) {
+  constructor(timeStamp, locale, timeZone) {
     this.date = new Date(timeStamp);
     this.locale = locale;
+    this.timeZone = timeZone;
   }
 
-  getDay() { return this.date.toLocaleDateString(this.locale, { weekday: 'short' }); }
+  getDay() { return this.date.toLocaleDateString(this.locale, { weekday: 'short', timeZone: this.timeZone }); }
 
-  getFullDay() { return this.date.toLocaleDateString(this.locale, { weekday: 'long' }); }
+  getFullDay() { return this.date.toLocaleDateString(this.locale, { weekday: 'long', timeZone: this.timeZone }); }
 
-  getDate() { return this.date.getDate(); }
+  getDate() { return this.date.toLocaleDateString(this.locale, { day: 'numeric', timeZone: this.timeZone }); }
 
-  getMonth() { return this.date.toLocaleDateString(this.locale, { month: 'long' }); }
+  getMonth() { return this.date.toLocaleDateString(this.locale, { month: 'long', timeZone: this.timeZone }); }
 
-  getTime() { return this.date.toTimeString().split(' ')[0].slice(0, 5); }
+  getTime() {
+    return this.date.toLocaleDateString(this.locale, {
+      hour: '2-digit',
+      minute: '2-digit',
+      timeZone: this.timeZone
+    })
+      .split(' ')[1];
+  }
 }
 
 class ImageApiKeySwitcher {
@@ -54,19 +62,16 @@ export function decimalToDegrees(decimal) {
 
 export const bgImageTemplate = {
   template:
-  ['linear-gradient(180deg, rgba(8, 15, 26, 0.59) 0%, rgba(17, 17, 46, 0.46) 100%) center center fixed, url(',
-    ') no-repeat center center fixed',
-  ],
+    ['linear-gradient(180deg, rgba(8, 15, 26, 0.59) 0%, rgba(17, 17, 46, 0.46) 100%) center center fixed, url(',
+      ') no-repeat center center fixed',
+    ],
 
   getString(url) {
     return this.template[0] + url + this.template[1];
   },
 };
 
-export function generateKeywords() {
-  const date = new Date();
-  const month = date.getMonth();
-  const hours = date.getHours();
+export function generateKeywords(month, hours) {
   let timeOfTheDay;
   let timeOfTheYear;
 
