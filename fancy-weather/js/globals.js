@@ -14,6 +14,11 @@ export const languages = {
   belarus: 'be',
 };
 
+// export const recognitionLanguages = {
+//   en: 'en-US',
+//   ru:
+// }
+
 export const units = {
   si: 'si',
   imperial: 'us',

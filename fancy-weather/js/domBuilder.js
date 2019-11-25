@@ -1,9 +1,9 @@
 import { languageMenu } from './menuLanguage';
 import {
-  fahrenheitButton, celsiusButton, updateButton, searchInputButton,
+  fahrenheitButton, celsiusButton, updateButton,
 } from './buttons';
 import { countryAndCity, map, coordinates } from './location';
-import { searchInput } from './searchInput';
+import { search } from './search';
 import {
   dateTime, temperatureToday, weatherIcon, weatherDataList, forecast,
 } from './weatherTime';
@@ -22,8 +22,8 @@ async function buildDom() {
 
   const rightSubCluster = document.createElement('div');
   rightSubCluster.classList.add('button-cluster__right-sub-cluster');
-  rightSubCluster.appendChild(searchInput);
-  rightSubCluster.appendChild(searchInputButton);
+  rightSubCluster.appendChild(search.field);
+  rightSubCluster.appendChild(search.button);
 
   const buttonCluster = document.createElement('div');
   buttonCluster.classList.add('button-cluster');

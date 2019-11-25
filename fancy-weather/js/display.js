@@ -11,9 +11,9 @@ import {
 import {
   countryAndCity, latitude, longitude, mapIframe,
 } from './location';
-import { searchInput } from './searchInput';
+import { search } from './search';
 import { settings } from './userData';
-import { searchInputButton, fahrenheitButton, celsiusButton } from './buttons';
+import { fahrenheitButton, celsiusButton } from './buttons';
 import { languageButtonText, menuItems } from './menuLanguage';
 
 class Display {
@@ -83,8 +83,8 @@ class Display {
   }
 
   drawSearchInput() {
-    searchInput.placeholder = dictionary.searchPlaceholder[settings.language];
-    searchInputButton.innerText = dictionary.search[settings.language];
+    search.field.placeholder = dictionary.searchPlaceholder[settings.language];
+    search.button.innerText = dictionary.search[settings.language];
   }
 
   async drawButtons() {

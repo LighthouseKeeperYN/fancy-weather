@@ -37,7 +37,7 @@ Object.entries(menuItems).forEach(([key, item]) => {
 
 languageMenu.appendChild(menu);
 
-languageButton.addEventListener('click', function toggleFaceButton() {
+languageButton.addEventListener('click', () => {
   menu.classList.toggle('drop-down-menu--open');
 
   languageButton.classList.toggle('drop-down-menu__face-button--open');
@@ -45,7 +45,7 @@ languageButton.addEventListener('click', function toggleFaceButton() {
   arrowDown.classList.toggle('arrow-down--open');
 });
 
-menu.addEventListener('click', function chooseMenuItem(e) {
+menu.addEventListener('click', (e) => {
   if (e.target.classList.contains('drop-down-menu__item')
     && e.target.classList.contains('inactive')) {
     settings.language = e.target.id;

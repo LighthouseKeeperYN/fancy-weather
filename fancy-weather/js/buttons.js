@@ -1,7 +1,6 @@
 import { settings } from './userData';
-import { units, dictionary } from './globals';
+import { units } from './globals';
 import { display } from './display';
-import { searchInput, processSearchQuery } from './searchInput';
 
 function toggleButtons() {
   fahrenheitButton.classList.toggle('inactive');
@@ -10,8 +9,9 @@ function toggleButtons() {
 
 function triggerAnimation(el) {
   el.style.animation = 'none';
+  // eslint-disable-next-line no-unused-expressions
   el.offsetHeight;
-  el.style.animation = null; 
+  el.style.animation = null;
 }
 
 export const fahrenheitButton = document.createElement('button');
@@ -49,11 +49,4 @@ updateButton.appendChild(spinner);
 updateButton.addEventListener('click', () => {
   triggerAnimation(spinner);
   display.drawBG();
-});
-
-export const searchInputButton = document.createElement('button');
-searchInputButton.classList.add('button', 'search-input__button');
-searchInputButton.innerText = dictionary.search[settings.language];
-searchInputButton.addEventListener('click', () => {
-  if (searchInput.value.length !== 0) processSearchQuery();
 });
