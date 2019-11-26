@@ -112,7 +112,7 @@ class Display {
   async drawWeatherAndTicker() {
     const data = await this.getData(settings.language);
     this.insertDataToWeatherCluster(data.locationData, data.weatherData);
-    this.ticker.drawTicker(data.weatherData)
+    this.ticker.drawTicker(data.weatherData);
   }
 
   async drawMap() {
