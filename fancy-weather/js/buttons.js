@@ -19,14 +19,14 @@ celsiusButton.innerText = '°C';
 fahrenheitButton.addEventListener('click', () => {
   if (settings.units === GLOBALS.units.si) {
     settings.units = GLOBALS.units.imperial;
-    display.drawWeather();
+    display.drawWeatherAndTicker();
     toggleButtons();
   }
 });
 celsiusButton.addEventListener('click', () => {
   if (settings.units === GLOBALS.units.imperial) {
     settings.units = GLOBALS.units.si;
-    display.drawWeather();
+    display.drawWeatherAndTicker();
     toggleButtons();
   }
 });

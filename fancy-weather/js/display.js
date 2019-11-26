@@ -109,9 +109,10 @@ class Display {
     else celsiusButton.classList.add('inactive');
   }
 
-  async drawWeather() {
+  async drawWeatherAndTicker() {
     const data = await this.getData(settings.language);
     this.insertDataToWeatherCluster(data.locationData, data.weatherData);
+    this.ticker.drawTicker(data.weatherData)
   }
 
   async drawMap() {

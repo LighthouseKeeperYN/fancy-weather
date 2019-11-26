@@ -1,6 +1,7 @@
 import { display } from './display';
 import * as GLOBALS from './globals';
 import { settings } from './userData';
+import { ticker } from './ticker';
 
 export const languageMenu = document.createElement('div');
 languageMenu.classList.add('language-menu');
@@ -60,6 +61,6 @@ menu.addEventListener('click', (e) => {
 
     display.drawSearchInput();
     display.drawMap();
-    display.drawWeather();
+    display.drawWeatherAndTicker();
   }
 });
