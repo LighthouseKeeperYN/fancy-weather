@@ -69,8 +69,8 @@ async function buildDom() {
 
   display.drawEverything();
 
-  window.addEventListener('beforeunload', async () => {
-    await settings.uploadUserData();
+  window.addEventListener('beforeunload', () => {
+    settings.uploadUserData();
   });
 }
 

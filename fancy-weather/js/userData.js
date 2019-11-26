@@ -22,8 +22,7 @@ class UserData {
     }
   }
 
-  // check if this could be done without async
-  async uploadUserData() {
+  uploadUserData() {
     this.localStorageData = {
       language: this.language,
       units: this.units,
