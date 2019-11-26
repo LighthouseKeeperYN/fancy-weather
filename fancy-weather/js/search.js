@@ -31,12 +31,16 @@ class Search {
   }
 
   triggerVoiceSearchWithButton = () => {
+    this.field.value = '';
+    this.field.classList.remove('search-field-error');
+    this.field.disabled = true;
+    this.button.disabled = true;
+
     this.recognition.lang = settings.language;
     this.recognition.start();
     this.recognitionButton.style.display = 'none';
+
     this.field.placeholder = GLOBALS.dictionary.voiceSearchPlaceholder[settings.language];
-    this.field.disabled = true;
-    this.button.disabled = true;
   }
 
   triggerSearchWithButton = () => {
