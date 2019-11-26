@@ -37,7 +37,7 @@ export async function getIPInfo(key) {
   let responseData;
 
   try {
-    response = await fetch(`https://ipinfo.io/json?token=${key}`);
+    response = await fetch(`https://cors-anywhere.herokuapp.com/https://ipinfo.io/json?token=${key}`);
     responseData = await response.json();
   } catch (error) {
     console.log('IPINFO', error);
