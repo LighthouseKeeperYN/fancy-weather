@@ -3,11 +3,45 @@ export class TimeFormatter {
     this.date = new Date(timeStamp);
     this.locale = locale;
     this.timeZone = timeZone;
+    this.weekBe = {
+      short: {
+        mon: 'пн',
+        tue: 'аў',
+        wed: 'ср',
+        thu: 'чц',
+        fri: 'пт',
+        sat: 'сб',
+        sun: 'нз',
+      },
+      full: {
+        monday: 'панядзелак',
+        tuesday: 'аўторак',
+        wednesday: 'серада',
+        thursday: 'чацвер',
+        friday: 'пятніца',
+        saturday: 'субота',
+        sunday: 'нядзеля',
+      },
+    };
   }
 
-  getDay() { return this.date.toLocaleDateString(this.locale, { weekday: 'short', timeZone: this.timeZone }); }
+  getDay() {
+    if (this.locale.toLowerCase() === 'be') {
+      const enDay = this.date.toLocaleDateString('en', { weekday: 'short', timeZone: this.timeZone });
+      return this.weekBe.short[enDay.toLowerCase()];
+    }
 
-  getFullDay() { return this.date.toLocaleDateString(this.locale, { weekday: 'long', timeZone: this.timeZone }); }
+    return this.date.toLocaleDateString(this.locale, { weekday: 'short', timeZone: this.timeZone });
+  }
+
+  getFullDay() {
+    if (this.locale.toLowerCase() === 'be') {
+      const enFullDay = this.date.toLocaleDateString('en', { weekday: 'long', timeZone: this.timeZone });
+      return this.weekBe.full[enFullDay.toLowerCase()];
+    }
+
+    return this.date.toLocaleDateString(this.locale, { weekday: 'long', timeZone: this.timeZone });
+  }
 
   getDate() { return this.date.toLocaleDateString(this.locale, { day: 'numeric', timeZone: this.timeZone }); }
 
