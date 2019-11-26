@@ -30,6 +30,7 @@ module.exports = {
     "max-classes-per-file": 0,
     "prefer-destructuring": 0,
     "import/no-cycle": 0,
+    "no-console": 0,
     "no-param-reassign": [2, { "props": false }],
     "no-constant-condition": ["error", { "checkLoops": false }]
   }

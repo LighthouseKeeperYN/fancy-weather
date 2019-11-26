@@ -2,9 +2,8 @@ export async function getWeatherData(apiKey, { latitude, longitude }, units, lan
   const response = await fetch(
     `https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/${apiKey}/${latitude},${longitude}?lang=${language}&units=${units}`,
   );
-
   const responseData = await response.json();
-  console.log(responseData);
+
   return responseData;
 }
 
@@ -18,8 +17,6 @@ export async function getGeoData(place, apiKey, language) {
   } catch (error) {
     console.log('GEODATA:', error);
   }
-
-  console.log(responseData);
 
   if (responseData.results.length === 0) return false;
 
@@ -38,7 +35,6 @@ export async function getGeoData(place, apiKey, language) {
 export async function getIPInfo(key) {
   let response;
   let responseData;
-  // https://cors-anywhere.herokuapp.com/
 
   try {
     response = await fetch(`https://ipinfo.io/json?token=${key}`);
@@ -46,7 +42,6 @@ export async function getIPInfo(key) {
   } catch (error) {
     console.log('IPINFO', error);
   }
-  console.log(responseData);
   return responseData;
 }
 
@@ -73,6 +68,5 @@ export async function getImageURL(keywords, apiKeys) {
     console.log('UNSPLASH-2: ', error);
   }
 
-  console.log(responseData);
   return responseData.urls.regular;
 }

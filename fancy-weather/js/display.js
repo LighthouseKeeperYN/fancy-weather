@@ -154,5 +154,5 @@ export const display = new Display(
   fetchers.getGeoData,
   fetchers.getImageURL,
   utilities.bgImageTemplate,
-  ticker
+  ticker,
 );

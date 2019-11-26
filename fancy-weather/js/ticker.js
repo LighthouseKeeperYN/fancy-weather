@@ -35,10 +35,10 @@ class Ticker {
     this.createTickerItem(`${Math.round(dayData.temperatureLow)}° - ${Math.round(dayData.temperatureHigh)}°`);
     this.createTickerItem(dayData.summary.slice(0, -1));
     this.createTickerItem(
-      `${GLOBALS.dictionary.wind[settings.language]}: ${Math.round(dayData.windSpeed)} ${settings.units === 'si' ? GLOBALS.dictionary.speed.si[settings.language] : GLOBALS.dictionary.speed.us[settings.language]}`
+      `${GLOBALS.dictionary.wind[settings.language]}: ${Math.round(dayData.windSpeed)} ${settings.units === 'si' ? GLOBALS.dictionary.speed.si[settings.language] : GLOBALS.dictionary.speed.us[settings.language]}`,
     );
     this.createTickerItem(
-      `${GLOBALS.dictionary.humidity[settings.language]}: ${Math.round(dayData.humidity * 100)}%`
+      `${GLOBALS.dictionary.humidity[settings.language]}: ${Math.round(dayData.humidity * 100)}%`,
     );
     this.createTickerItem('');
   }
@@ -50,12 +50,11 @@ class Ticker {
   }
 
   drawTicker = (weatherData) => {
-    this.ticker.innerHTML = ''
+    this.ticker.innerHTML = '';
 
     this.createTickerContent(weatherData.daily.data);
-    this.itemCollection.forEach(item => this.ticker.appendChild(item));
+    this.itemCollection.forEach((item) => this.ticker.appendChild(item));
     this.itemCollection = [];
-
   }
 }
 

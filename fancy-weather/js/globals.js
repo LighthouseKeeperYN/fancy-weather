@@ -74,12 +74,12 @@ export const dictionary = {
     si: {
       en: 'm/s',
       ru: 'м/с',
-      be: 'м/с'
+      be: 'м/с',
     },
     us: {
       en: 'mph',
       ru: 'Миль/ч',
-      be: 'Міль/ч'
-    }
-  }
+      be: 'Міль/ч',
+    },
+  },
 };
