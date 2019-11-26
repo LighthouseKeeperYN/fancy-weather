@@ -1,5 +1,5 @@
 import { fahrenheitButton, celsiusButton } from './buttons';
-import * as fetch from './fetch';
+import * as fetchers from './fetchers';
 import * as GLOBALS from './globals';
 import {
   countryAndCity,
@@ -82,6 +82,8 @@ class Display {
       language,
     );
 
+    if (!locationData) return false;
+
     const weatherData = await this.getWeatherData(
       GLOBALS.apiKeys.weather,
       locationData,
@@ -115,8 +117,8 @@ class Display {
     this.insertDataToMapCluster(data.locationData);
   }
 
-  async drawBG() {
-    const dataEn = await this.getData(GLOBALS.languages.english);
+  async drawBG(data) {
+    const dataEn = data || await this.getData(GLOBALS.languages.english);
 
     const timeFormatter = new utilities.TimeFormatter(new Date(), 'ru', dataEn.weatherData.timezone);
     const month = timeFormatter.getMonth();
@@ -133,17 +135,20 @@ class Display {
   async drawEverything() {
     const data = await this.getData(settings.language);
 
-    this.drawButtons();
-    this.drawSearchInput();
-    this.insertDataToWeatherCluster(data.locationData, data.weatherData);
-    this.insertDataToMapCluster(data.locationData, data.weatherData);
-    this.drawBG();
-    this.initTimeUpdater(data.weatherData);
+    if (!data) search.throwError();
+    else {
+      this.drawButtons();
+      this.drawSearchInput();
+      this.insertDataToWeatherCluster(data.locationData, data.weatherData);
+      this.insertDataToMapCluster(data.locationData, data.weatherData);
+      this.drawBG(settings.language === GLOBALS.languages.english ? data : false);
+      this.initTimeUpdater(data.weatherData);
+    }
   }
 }
 export const display = new Display(
-  fetch.getWeatherData,
-  fetch.getGeoData,
-  fetch.getImageURL,
+  fetchers.getWeatherData,
+  fetchers.getGeoData,
+  fetchers.getImageURL,
   utilities.bgImageTemplate,
 );

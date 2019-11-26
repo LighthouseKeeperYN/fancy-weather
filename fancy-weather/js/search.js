@@ -22,10 +22,10 @@ class Search {
     this.recognitionButton.classList.add('search-input__voice-button');
     this.recognitionButton.addEventListener('click', this.triggerVoiceSearchWithButton);
 
-    this.recognition = new (window.speechRecognition || window.webkitSpeechRecognition)();
-    this.recognition.interimResults = true;
-    this.recognition.addEventListener('result', this.getTranscript);
-    this.recognition.addEventListener('end', this.voiceInputToSearchField);
+    // this.recognition = new (window.speechRecognition || window.webkitSpeechRecognition)();
+    // this.recognition.interimResults = true;
+    // this.recognition.addEventListener('result', this.getTranscript);
+    // this.recognition.addEventListener('end', this.voiceInputToSearchField);
 
     this.transcript = '';
   }
@@ -40,7 +40,10 @@ class Search {
   }
 
   triggerSearchWithButton = () => {
-    if (this.field.value.length !== 0) this.processSearchQuery();
+    if ((this.field.value.length > 2) && /^[\p{Letter}\d]+$/u.test(this.field.value)) {
+      this.processSearchQuery();
+    }
+    else this.throwError();
   }
 
   triggerSearchWithEnter = (e) => {
@@ -65,10 +68,19 @@ class Search {
     this.button.disabled = false;
   }
 
+  throwError = () => {
+    this.field.classList.add('search-field-error');
+    this.field.placeholder = GLOBALS.dictionary.searchError[settings.language];
+    this.field.value = '';
+    this.field.blur();
+  }
+
   processSearchQuery = () => {
+    this.field.classList.remove('search-field-error');
     settings.location = this.field.value;
     display.drawEverything();
     this.field.value = '';
+    this.field.placeholder = '';
     this.field.blur();
   }
 }

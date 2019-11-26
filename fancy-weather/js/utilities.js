@@ -59,7 +59,8 @@ export const imageApiKeySwitcher = new ImageApiKeySwitcher();
 export function decimalToDegrees(decimal) {
   const splitted = decimal.toString().split('.');
   const result = { degrees: splitted[0] };
-  result.minutes = splitted[1] === undefined ? '0' : Math.round(Math.abs((decimal - Number(splitted[0]))) * 60).toString();
+  result.minutes = splitted[1] === undefined ? '0' :
+    Math.round(Math.abs((decimal - Number(splitted[0]))) * 60).toString();
   return result;
 }
 

@@ -1,1 +1,1 @@
-console.log(new Date(undefined));
+console.log(new Date().toLocaleString('be', {weekday: 'long'}));
