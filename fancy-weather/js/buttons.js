@@ -1,17 +1,11 @@
 import { display } from './display';
 import * as GLOBALS from './globals';
 import { settings } from './userData';
+import * as utilities from './utilities';
 
 function toggleButtons() {
   fahrenheitButton.classList.toggle('inactive');
   celsiusButton.classList.toggle('inactive');
-}
-
-function triggerAnimation(el) {
-  el.style.animation = 'none';
-  // eslint-disable-next-line no-unused-expressions
-  el.offsetHeight;
-  el.style.animation = null;
 }
 
 export const fahrenheitButton = document.createElement('button');
@@ -46,6 +40,6 @@ spinner.classList.add('spinner');
 updateButton.appendChild(spinner);
 
 updateButton.addEventListener('click', () => {
-  triggerAnimation(spinner);
+  utilities.triggerAnimation(spinner);
   display.drawBG();
 });

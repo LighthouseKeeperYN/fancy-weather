@@ -91,3 +91,10 @@ export function generateKeywords(month, hours) {
 
   return [timeOfTheYear, timeOfTheDay];
 }
+
+export function triggerAnimation(el) {
+  el.style.animation = 'none';
+  // eslint-disable-next-line no-unused-expressions
+  el.offsetHeight;
+  el.style.animation = null;
+}

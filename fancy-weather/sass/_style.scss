@@ -438,8 +438,6 @@ body {
   }
 }
 
-
-
 @keyframes ticker {
   0% {
     -webkit-transform: translate3d(0, 0, 0);
@@ -465,9 +463,9 @@ body {
   padding-left: 100%;
 
   background: linear-gradient(to top,
-      rgba(27, 27, 44, 0.6),
-      rgba(27, 27, 44, 0.6) 50%,
-      rgba(27, 27, 44, 0) 100%);
+      rgba(43, 43, 66, 0.6),
+      rgba(43, 43, 66, 0.6) 50%,
+      rgba(43, 43, 66, 0) 100%);
 
   @include respond(tab-port) {
     display: none;
