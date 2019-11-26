@@ -49,15 +49,15 @@ export async function getImageURL(keywords, apiKeys) {
 
   try {
     response = await fetch(`https://api.unsplash.com/photos/random?query=${keywords[0]},${keywords[1]},${keywords[2]}&client_id=${key}&orientation=landscape`);
-
-    for (let i = 0; response.status === 403 && i < apiKeys.keys.length; i++) {
-      try {
-        key = apiKeys.updateKey();
-        // eslint-disable-next-line no-await-in-loop
-        response = await fetch(`https://api.unsplash.com/photos/random?query=${keywords[0]},${keywords[1]},${keywords[2]}&client_id=${key}&orientation=landscape`);
-      } catch (error) { console.log('UNSPLASH-loop: ', error); }
-    }
   } catch (error) { console.log('UNSPLASH-1: ', error); }
+
+  for (let i = 0; response.status === 403 && i < apiKeys.keys.length; i++) {
+    try {
+      key = apiKeys.updateKey();
+      // eslint-disable-next-line no-await-in-loop
+      response = await fetch(`https://api.unsplash.com/photos/random?query=${keywords[0]},${keywords[1]},${keywords[2]}&client_id=${key}&orientation=landscape`);
+    } catch (error) { console.log('UNSPLASH-loop: ', error); }
+  }
 
   try { responseData = await response.json(); } catch (error) { console.log('UNSPLASH-2: ', error); }
 

@@ -23,6 +23,20 @@ export class TimeFormatter {
         sunday: 'нядзеля',
       },
     };
+    this.monthBe = {
+      january: 'cтудзень',
+      february: 'люты',
+      march: 'сакавік',
+      april: 'красавік',
+      may: 'май',
+      june: 'чэрвень',
+      july: 'ліпень',
+      august: 'жнівень',
+      september: 'верасень',
+      october: 'кастрычніцк',
+      november: 'лістапад',
+      december: 'снежань',
+    };
   }
 
   getDay() {
@@ -45,7 +59,14 @@ export class TimeFormatter {
 
   getDate() { return this.date.toLocaleDateString(this.locale, { day: 'numeric', timeZone: this.timeZone }); }
 
-  getMonth() { return this.date.toLocaleDateString(this.locale, { month: 'long', timeZone: this.timeZone }); }
+  getMonth() {
+    if (this.locale.toLowerCase() === 'be') {
+      const enMonth = this.date.toLocaleDateString('en', { month: 'long', timeZone: this.timeZone });
+      return this.monthBe[enMonth.toLowerCase()];
+    }
+
+    return this.date.toLocaleDateString(this.locale, { month: 'long', timeZone: this.timeZone });
+  }
 
   getTime() {
     return this.date.toLocaleDateString('ru', {
