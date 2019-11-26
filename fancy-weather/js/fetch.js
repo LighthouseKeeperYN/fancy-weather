@@ -32,8 +32,6 @@ export async function getIPInfo(key) {
   } catch (error) {
     console.log('IPINFO', error);
   }
-  // const response = await fetch(`https://ipinfo.io/json?token=${key}`);
-  // const responseData = await response.json();
   console.log(responseData);
   return responseData;
 }
@@ -42,17 +40,17 @@ export async function getImageURL(keywords, apiKeys) {
   let key = apiKeys.getKey();
   let response;
   let responseData;
+
   try {
     response = await fetch(`https://api.unsplash.com/photos/random?query=${keywords[0]},${keywords[1]},${keywords[2]}&client_id=${key}&orientation=landscape`);
 
-    for (let i = 0; response.status === 403 && i < 8; i++) {
+    for (let i = 0; response.status === 403 && i < apiKeys.keys.length; i++) {
       key = apiKeys.updateKey();
-
       // eslint-disable-next-line no-await-in-loop
       response = await fetch(`https://api.unsplash.com/photos/random?query=${keywords[0]},${keywords[1]},${keywords[2]}&client_id=${key}&orientation=landscape`);
     }
   } catch (error) {
-    console.log('UNSPLASH-1:', error);
+    console.log('UNSPLASH-1: ', error);
   }
 
   try {
@@ -60,16 +58,7 @@ export async function getImageURL(keywords, apiKeys) {
   } catch (error) {
     console.log('UNSPLASH-2: ', error);
   }
-  // let response = await fetch(`https://api.unsplash.com/photos/random?query=${keywords[0]},${keywords[1]},${keywords[2]}&client_id=${key}&orientation=landscape`);
 
-  // for (let i = 0; response.status === 403 && i < 8; i++) {
-  //   key = apiKeys.updateKey();
-
-  //   // eslint-disable-next-line no-await-in-loop
-  //   response = await fetch(`https://api.unsplash.com/photos/random?query=${keywords[0]},${keywords[1]},${keywords[2]}&client_id=${key}&orientation=landscape`);
-  // }
-
-  // const responseData = await response.json();
   console.log(responseData);
   return responseData.urls.regular;
 }

@@ -34,8 +34,9 @@ class Display {
     dateTime.innerText = `${this.currentTime.getDay()} ${this.currentTime.getDate()} ${this.currentTime.getMonth()} \xa0 ${this.currentTime.getTime()}`;
   }
 
-  initTimeUpdater() {
-    // setInterval(() => { this.updateTime(); }, (1000 * 60));
+  initTimeUpdater = (weatherData) => {
+    if (this.interval) clearInterval(this.interval);
+    this.interval = setInterval(() => { this.updateTime(weatherData); }, (1000 * 60));
   }
 
   insertDataToWeatherCluster(locationData, weatherData) {
@@ -132,6 +133,7 @@ class Display {
     this.insertDataToWeatherCluster(data.locationData, data.weatherData);
     this.insertDataToMapCluster(data.locationData, data.weatherData);
     this.drawBG();
+    this.initTimeUpdater(data.weatherData);
   }
 }
 export const display = new Display(

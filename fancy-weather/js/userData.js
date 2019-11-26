@@ -5,7 +5,8 @@ class UserData {
   constructor() {
     this.language = GLOBALS.languages.english;
     this.units = GLOBALS.units.si;
-    this.location = 'Brest Belarus';
+    this.location = 'Belarus';
+    this.timeZone = ''
   }
 
   async downloadUserData() {
@@ -16,8 +17,8 @@ class UserData {
       this.language = this.localStorageData.language || GLOBALS.languages.english;
       this.units = this.localStorageData.units || GLOBALS.units.si;
       this.location = `${this.ipData.city || ''} ${this.ipData.country || this.ipData.region}`;
-    } catch (err) {
-      console.log(err);
+    } catch (error) {
+      console.log('downloadUserData:', error);
     }
   }
 

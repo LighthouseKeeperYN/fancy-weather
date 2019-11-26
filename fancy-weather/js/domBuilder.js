@@ -66,7 +66,6 @@ async function buildDom() {
   document.body.appendChild(mainWrapper);
 
   display.drawEverything();
-  display.initTimeUpdater();
 
   window.addEventListener('beforeunload', async () => {
     await settings.uploadUserData();

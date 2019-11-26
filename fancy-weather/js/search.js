@@ -22,10 +22,10 @@ class Search {
     this.recognitionButton.classList.add('search-input__voice-button');
     this.recognitionButton.addEventListener('click', this.triggerVoiceSearchWithButton);
 
-    // this.recognition = new (window.speechRecognition || window.webkitSpeechRecognition)();
-    // this.recognition.interimResults = true;
-    // this.recognition.addEventListener('result', this.getTranscript);
-    // this.recognition.addEventListener('end', this.voiceInputToSearchField);
+    this.recognition = new (window.speechRecognition || window.webkitSpeechRecognition)();
+    this.recognition.interimResults = true;
+    this.recognition.addEventListener('result', this.getTranscript);
+    this.recognition.addEventListener('end', this.voiceInputToSearchField);
 
     this.transcript = '';
   }
@@ -36,6 +36,7 @@ class Search {
     this.recognitionButton.style.display = 'none';
     this.field.placeholder = GLOBALS.dictionary.voiceSearchPlaceholder[settings.language];
     this.field.disabled = true;
+    this.button.disabled = true;
   }
 
   triggerSearchWithButton = () => {
@@ -57,10 +58,11 @@ class Search {
     if (this.transcript.length) {
       this.field.value = this.transcript;
       this.processSearchQuery();
-      this.field.placeholder = GLOBALS.dictionary.searchPlaceholder[settings.language];
-      this.recognitionButton.style.display = 'block';
-      this.field.disabled = false;
     }
+    this.field.placeholder = GLOBALS.dictionary.searchPlaceholder[settings.language];
+    this.recognitionButton.style.display = 'block';
+    this.field.disabled = false;
+    this.button.disabled = false;
   }
 
   processSearchQuery = () => {
