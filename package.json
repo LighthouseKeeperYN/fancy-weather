@@ -20,7 +20,8 @@
     "lint": "eslint ./**/*.js",
     "lint:fix": "eslint --fix ./**/*.js",
     "clear": "del-cli dist",
-    "deploy": "surge dist fancy-weather-lhk.surge.sh"
+    "deploy": "surge dist fancy-weather-lhk.surge.sh",
+    "test": "jest"
   },
   "devDependencies": {
     "@babel/core": "^7.6.0",

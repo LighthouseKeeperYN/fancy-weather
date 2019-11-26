@@ -6,7 +6,7 @@ class UserData {
     this.language = GLOBALS.languages.english;
     this.units = GLOBALS.units.si;
     this.location = 'Belarus';
-    this.timeZone = ''
+    this.timeZone = '';
   }
 
   async downloadUserData() {

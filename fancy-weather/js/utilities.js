@@ -1,5 +1,5 @@
 export class TimeFormatter {
-  constructor(timeStamp, locale, timeZone) {
+  constructor(timeStamp = new Date(), locale = 'en', timeZone) {
     this.date = new Date(timeStamp);
     this.locale = locale;
     this.timeZone = timeZone;
@@ -15,9 +15,9 @@ export class TimeFormatter {
 
   getTime() {
     return this.date.toLocaleDateString('ru', {
-      hour: '2-digit',
+      hour: 'numeric',
       minute: '2-digit',
-      timeZone: this.timeZone
+      timeZone: this.timeZone,
     })
       .split(' ')[1];
   }
@@ -58,10 +58,9 @@ export const imageApiKeySwitcher = new ImageApiKeySwitcher();
 
 export function decimalToDegrees(decimal) {
   const splitted = decimal.toString().split('.');
-  return {
-    degrees: splitted[0],
-    minutes: (splitted[1] / 60).toString(),
-  };
+  const result = { degrees: splitted[0] };
+  result.minutes = splitted[1] === undefined ? '0' : Math.round(Math.abs((decimal - Number(splitted[0]))) * 60).toString();
+  return result;
 }
 
 export const bgImageTemplate = {
@@ -89,5 +88,5 @@ export function generateKeywords(month, hours) {
   else if (hours > 15 && hours <= 21) timeOfTheDay = 'evening';
   else timeOfTheDay = 'night';
 
-  return [timeOfTheDay, timeOfTheYear];
+  return [timeOfTheYear, timeOfTheDay];
 }

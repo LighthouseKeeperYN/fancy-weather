@@ -30,7 +30,11 @@ class Display {
   }
 
   updateTime(weatherData) {
-    this.currentTime = new utilities.TimeFormatter(new Date(), settings.language, weatherData.timezone);
+    this.currentTime = new utilities.TimeFormatter(
+      new Date(),
+      settings.language,
+      weatherData.timezone,
+    );
     dateTime.innerText = `${this.currentTime.getDay()} ${this.currentTime.getDate()} ${this.currentTime.getMonth()} \xa0 ${this.currentTime.getTime()}`;
   }
 
@@ -120,6 +124,7 @@ class Display {
 
     const keywords = utilities.generateKeywords(month, hours);
     keywords.push(dataEn.weatherData.currently.summary);
+    console.log('bg image keywords:', keywords);
     const imageURL = await this.getImageURL(keywords, GLOBALS.apiKeys.image);
 
     this.insertBGToBody(imageURL);

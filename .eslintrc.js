@@ -11,7 +11,9 @@ module.exports = {
   "globals": {
     "Atomics": "readonly",
     "SharedArrayBuffer": "readonly",
-    "firebase": false
+    "firebase": false,
+    "test": false,
+    "expect": false
   },
   "parserOptions": {
     "ecmaVersion": 2018,
