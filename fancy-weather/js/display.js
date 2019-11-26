@@ -18,15 +18,17 @@ import {
   weatherDataList,
   forecast,
 } from './weatherTime';
+import { ticker } from './ticker';
 
 class Display {
-  constructor(getWeatherDataFn, getGeoDataFn, getImageURLFn, bgImageTemplateFn) {
+  constructor(getWeatherDataFn, getGeoDataFn, getImageURLFn, bgImageTemplateFn, tickerFn) {
     this.getWeatherData = getWeatherDataFn;
     this.getGeoData = getGeoDataFn;
     this.getImageURL = getImageURLFn;
     this.bgImageTemplate = bgImageTemplateFn;
     this.search = search;
     this.menuLanguage = menuLanguage;
+    this.ticker = tickerFn;
   }
 
   updateTime(weatherData) {
@@ -142,6 +144,7 @@ class Display {
       this.insertDataToWeatherCluster(data.locationData, data.weatherData);
       this.insertDataToMapCluster(data.locationData, data.weatherData);
       this.drawBG(settings.language === GLOBALS.languages.english ? data : false);
+      this.ticker.drawTicker(data.weatherData);
       this.initTimeUpdater(data.weatherData);
     }
   }
@@ -151,4 +154,5 @@ export const display = new Display(
   fetchers.getGeoData,
   fetchers.getImageURL,
   utilities.bgImageTemplate,
+  ticker
 );

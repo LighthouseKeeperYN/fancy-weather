@@ -42,8 +42,7 @@ class Search {
   triggerSearchWithButton = () => {
     if ((this.field.value.length > 2) && /^[\p{Letter}\d]+$/u.test(this.field.value)) {
       this.processSearchQuery();
-    }
-    else this.throwError();
+    } else this.throwError();
   }
 
   triggerSearchWithEnter = (e) => {

@@ -21,6 +21,7 @@ class UserData {
       console.log('downloadUserData:', error);
     }
   }
+
   // check if this could be done without async
   async uploadUserData() {
     this.localStorageData = {

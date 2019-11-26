@@ -19,6 +19,7 @@ import {
   weatherDataList,
   forecast,
 } from './weatherTime';
+import { ticker } from './ticker';
 
 async function buildDom() {
   await settings.downloadUserData();
@@ -64,6 +65,7 @@ async function buildDom() {
 
   document.body.appendChild(buttonCluster);
   document.body.appendChild(mainWrapper);
+  document.body.appendChild(ticker.tickerWrapper);
 
   display.drawEverything();
 

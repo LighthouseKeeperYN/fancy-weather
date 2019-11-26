@@ -64,5 +64,22 @@ export const dictionary = {
     en: 'Incorrect data',
     ru: 'Неверные данные',
     by: 'Няслушныя дадзеныя',
+  },
+  weatherInOtherDays: {
+    en: 'Weather in other days:',
+    ru: 'Погода в другие дни:',
+    be: 'Надвор\'е ў іншыя дні:',
+  },
+  speed: {
+    si: {
+      en: 'm/s',
+      ru: 'м/с',
+      be: 'м/с'
+    },
+    us: {
+      en: 'mph',
+      ru: 'Миль/ч',
+      be: 'Міль/ч'
+    }
   }
 };
