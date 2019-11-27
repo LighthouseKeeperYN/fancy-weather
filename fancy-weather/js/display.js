@@ -9,6 +9,7 @@ import {
 } from './location';
 import * as menuLanguage from './menuLanguage';
 import { search } from './search';
+import { ticker } from './ticker';
 import { settings } from './userData';
 import * as utilities from './utilities';
 import {
@@ -18,7 +19,6 @@ import {
   weatherDataList,
   forecast,
 } from './weatherTime';
-import { ticker } from './ticker';
 
 class Display {
   constructor(getWeatherDataFn, getGeoDataFn, getImageURLFn, bgImageTemplateFn, tickerFn) {

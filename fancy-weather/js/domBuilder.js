@@ -11,6 +11,7 @@ import {
 } from './location';
 import { languageMenu } from './menuLanguage';
 import { search } from './search';
+import { ticker } from './ticker';
 import { settings } from './userData';
 import {
   dateTime,
@@ -19,7 +20,6 @@ import {
   weatherDataList,
   forecast,
 } from './weatherTime';
-import { ticker } from './ticker';
 
 async function buildDom() {
   await settings.downloadUserData();

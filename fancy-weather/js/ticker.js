@@ -1,6 +1,6 @@
 import * as GLOBALS from './globals';
-import * as utilities from './utilities';
 import { settings } from './userData';
+import * as utilities from './utilities';
 
 class Ticker {
   constructor() {
