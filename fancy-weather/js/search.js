@@ -46,7 +46,7 @@ class Search {
   }
 
   cancelWithClick = (e) => {
-    if (e.target !== this.field) {
+    if (e.target !== this.field && e.target !== this.recognitionButton) {
       this.cleanSearchField();
     }
   }
