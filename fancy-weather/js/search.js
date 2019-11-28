@@ -45,6 +45,12 @@ class Search {
     }
   }
 
+  cancelWithClick = (e) => {
+    if (e.target !== this.field) {
+      this.cleanSearchField();
+    }
+  }
+
   throwError = () => {
     this.cleanSearchField();
     this.field.classList.add('search-field-error');
@@ -53,15 +59,17 @@ class Search {
 
   triggerVoiceSearch = () => {
     window.addEventListener('keyup', this.cancelWithEsc);
+    window.addEventListener('click', this.cancelWithClick);
 
+    this.button.classList.add('disabled');
+    this.recognitionButton.style.display = 'none';
+    this.button.disabled = true;
     this.cleanSearchField();
     this.field.placeholder = GLOBALS.dictionary.voiceSearchPlaceholder[settings.language];
     this.field.disabled = true;
-    this.button.disabled = true;
 
     this.recognition.lang = settings.language;
     this.recognition.start();
-    this.recognitionButton.style.display = 'none';
   }
 
   getTranscript = (e) => {
@@ -79,10 +87,12 @@ class Search {
     } else this.throwError();
 
     window.removeEventListener('keyup', this.cancelWithEsc);
+    window.removeEventListener('click', this.cancelWithClick);
 
+    this.button.classList.remove('disabled');
     this.recognitionButton.style.display = 'block';
-    this.field.disabled = false;
     this.button.disabled = false;
+    this.field.disabled = false;
   }
 
   processSearchQuery = (query) => {
