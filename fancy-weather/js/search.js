@@ -54,6 +54,8 @@ class Search {
   throwError = () => {
     this.cleanSearchField();
     this.field.classList.add('search-field-error');
+    console.log(GLOBALS.dictionary.searchError)
+    console.log(settings.language)
     this.field.placeholder = GLOBALS.dictionary.searchError[settings.language];
   }
 

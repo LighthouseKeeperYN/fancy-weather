@@ -63,7 +63,7 @@ export const dictionary = {
   searchError: {
     en: 'Incorrect data',
     ru: 'Неверные данные',
-    by: 'Няслушныя дадзеныя',
+    be: 'Няслушныя дадзеныя',
   },
   weatherInOtherDays: {
     en: 'Weather in other days:',
