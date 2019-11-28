@@ -15,22 +15,22 @@ class Search {
     this.button.classList.add('button', 'search-input__button');
     this.button.innerText = GLOBALS.dictionary.search[settings.language];
 
-    this.field.addEventListener('keyup', this.triggerSearchWithEnter);
-    this.button.addEventListener('click', this.triggerSearchWithButton);
-
     this.recognitionButton = document.createElement('button');
     this.recognitionButton.classList.add('search-input__voice-button');
-    this.recognitionButton.addEventListener('click', this.triggerVoiceSearchWithButton);
 
     this.recognition = new (window.speechRecognition || window.webkitSpeechRecognition)();
     this.recognition.interimResults = true;
+
+    this.field.addEventListener('keyup', this.processSearchWithEnter);
+    this.button.addEventListener('click', this.processSearchWithButton);
+    this.recognitionButton.addEventListener('click', this.triggerVoiceSearch);
     this.recognition.addEventListener('result', this.getTranscript);
-    this.recognition.addEventListener('end', this.voiceInputToSearchField);
+    this.recognition.addEventListener('end', this.processVoiceSearch);
 
     this.transcript = '';
   }
 
-  triggerVoiceSearchWithButton = () => {
+  triggerVoiceSearch = () => {
     this.field.value = '';
     this.field.classList.remove('search-field-error');
     this.field.disabled = true;
@@ -43,13 +43,13 @@ class Search {
     this.field.placeholder = GLOBALS.dictionary.voiceSearchPlaceholder[settings.language];
   }
 
-  triggerSearchWithButton = () => {
-    if ((this.field.value.length > 2) && /^[\p{Letter}\d]+$/u.test(this.field.value)) {
+  processSearchWithButton = () => {
+    if ((this.field.value.length > 1) && /^[\p{Letter}\d]+$/u.test(this.field.value)) {
       this.processSearchQuery();
     } else this.throwError();
   }
 
-  triggerSearchWithEnter = (e) => {
+  processSearchWithEnter = (e) => {
     if (e.key === 'Enter' && this.field.value.length !== 0) this.processSearchQuery();
   }
 
@@ -60,12 +60,18 @@ class Search {
       .join('');
   }
 
-  voiceInputToSearchField = () => {
-    if (this.transcript.length) {
+  processVoiceSearch = () => {
+    if ((this.transcript.length > 1) && /^[\p{Letter}\d]+$/u.test(this.transcript)) {
       this.field.value = this.transcript;
       this.processSearchQuery();
+    } else {
+      if (this.transcript.length === 0) {
+        this.field.placeholder = GLOBALS.dictionary.searchPlaceholder[settings.language];
+      } else {
+        this.throwError();
+      }
     }
-    this.field.placeholder = GLOBALS.dictionary.searchPlaceholder[settings.language];
+
     this.recognitionButton.style.display = 'block';
     this.field.disabled = false;
     this.button.disabled = false;
