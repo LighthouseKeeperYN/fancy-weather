@@ -21,6 +21,7 @@ class Search {
     this.recognition = new (window.speechRecognition || window.webkitSpeechRecognition)();
     this.recognition.interimResults = true;
 
+    this.field.addEventListener('keyup', this.cancelWithEsc);
     this.field.addEventListener('keyup', this.processSearchWithEnter);
     this.button.addEventListener('click', this.processSearchWithButton);
     this.recognitionButton.addEventListener('click', this.triggerVoiceSearch);
@@ -30,29 +31,37 @@ class Search {
     this.transcript = '';
   }
 
-  triggerVoiceSearch = () => {
+  cleanSearchField = () => {
     this.field.value = '';
+    this.field.blur();
     this.field.classList.remove('search-field-error');
+    this.recognition.stop();
+    this.field.placeholder = GLOBALS.dictionary.searchPlaceholder[settings.language];
+  }
+
+  cancelWithEsc = (e) => {
+    if (e.key === 'Escape') {
+      this.cleanSearchField();
+    }
+  }
+
+  throwError = () => {
+    this.cleanSearchField();
+    this.field.classList.add('search-field-error');
+    this.field.placeholder = GLOBALS.dictionary.searchError[settings.language];
+  }
+
+  triggerVoiceSearch = () => {
+    window.addEventListener('keyup', this.cancelWithEsc);
+
+    this.cleanSearchField();
+    this.field.placeholder = GLOBALS.dictionary.voiceSearchPlaceholder[settings.language];
     this.field.disabled = true;
     this.button.disabled = true;
 
     this.recognition.lang = settings.language;
     this.recognition.start();
     this.recognitionButton.style.display = 'none';
-
-    this.field.placeholder = GLOBALS.dictionary.voiceSearchPlaceholder[settings.language];
-  }
-
-  processSearchWithButton = () => {
-    if ((this.field.value.length > 1) && /^[\p{Letter}\d]+$/u.test(this.field.value)) {
-      this.processSearchQuery(this.field.value);
-    } else this.throwError();
-  }
-
-  processSearchWithEnter = (e) => {
-    if (e.key === 'Enter' && this.field.value.length !== 0)  {
-      this.processSearchQuery(this.field.value);
-    }
   }
 
   getTranscript = (e) => {
@@ -64,36 +73,35 @@ class Search {
 
   processVoiceSearch = () => {
     if ((this.transcript.length > 1) && /^[\p{Letter}\d]+$/u.test(this.transcript)) {
-      // this.field.value = this.transcript;
       this.processSearchQuery(this.transcript);
-    } else {
-      if (this.transcript.length === 0) {
-        this.field.placeholder = GLOBALS.dictionary.searchPlaceholder[settings.language];
-      } else {
-        this.throwError();
-      }
-    }
+    } else if (this.transcript.length === 0) {
+      this.field.placeholder = GLOBALS.dictionary.searchPlaceholder[settings.language];
+    } else this.throwError();
+
+    window.removeEventListener('keyup', this.cancelWithEsc);
 
     this.recognitionButton.style.display = 'block';
     this.field.disabled = false;
     this.button.disabled = false;
   }
 
-  throwError = () => {
-    this.field.classList.add('search-field-error');
-    this.field.placeholder = GLOBALS.dictionary.searchError[settings.language];
-    this.field.value = '';
-    this.field.blur();
-  }
-
   processSearchQuery = (query) => {
-    this.field.value = '';
-    this.field.placeholder = '';
-    this.field.classList.remove('search-field-error');
+    this.cleanSearchField();
     settings.location = query;
-    this.field.blur();
 
     display.drawEverything();
+  }
+
+  processSearchWithButton = () => {
+    if ((this.field.value.length > 1) && /^[\p{Letter}\d]+$/u.test(this.field.value)) {
+      this.processSearchQuery(this.field.value);
+    } else this.throwError();
+  }
+
+  processSearchWithEnter = (e) => {
+    if (e.key === 'Enter' && this.field.value.length !== 0) {
+      this.processSearchQuery(this.field.value);
+    }
   }
 }
 
