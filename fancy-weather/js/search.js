@@ -45,12 +45,14 @@ class Search {
 
   processSearchWithButton = () => {
     if ((this.field.value.length > 1) && /^[\p{Letter}\d]+$/u.test(this.field.value)) {
-      this.processSearchQuery();
+      this.processSearchQuery(this.field.value);
     } else this.throwError();
   }
 
   processSearchWithEnter = (e) => {
-    if (e.key === 'Enter' && this.field.value.length !== 0) this.processSearchQuery();
+    if (e.key === 'Enter' && this.field.value.length !== 0)  {
+      this.processSearchQuery(this.field.value);
+    }
   }
 
   getTranscript = (e) => {
@@ -62,8 +64,8 @@ class Search {
 
   processVoiceSearch = () => {
     if ((this.transcript.length > 1) && /^[\p{Letter}\d]+$/u.test(this.transcript)) {
-      this.field.value = this.transcript;
-      this.processSearchQuery();
+      // this.field.value = this.transcript;
+      this.processSearchQuery(this.transcript);
     } else {
       if (this.transcript.length === 0) {
         this.field.placeholder = GLOBALS.dictionary.searchPlaceholder[settings.language];
@@ -84,13 +86,14 @@ class Search {
     this.field.blur();
   }
 
-  processSearchQuery = () => {
-    this.field.classList.remove('search-field-error');
-    settings.location = this.field.value;
-    display.drawEverything();
+  processSearchQuery = (query) => {
     this.field.value = '';
     this.field.placeholder = '';
+    this.field.classList.remove('search-field-error');
+    settings.location = query;
     this.field.blur();
+
+    display.drawEverything();
   }
 }
 
