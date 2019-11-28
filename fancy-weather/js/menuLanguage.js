@@ -29,7 +29,6 @@ Object.entries(menuItems).forEach(([key, item]) => {
   item.classList.add('drop-down-menu__item');
   item.classList.add('button');
   item.classList.add('inactive');
-  // eslint-disable-next-line no-await-in-loop
   item.id = key;
   item.innerText = key;
   menu.appendChild(item);
