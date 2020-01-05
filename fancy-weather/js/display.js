@@ -129,7 +129,6 @@ class Display {
 
     const keywords = utilities.generateKeywords(month, hours);
     keywords.push(dataEn.weatherData.currently.summary);
-    console.log('bg image keywords:', keywords);
     const imageURL = await this.getImageURL(keywords, GLOBALS.apiKeys.image);
 
     this.insertBGToBody(imageURL);
