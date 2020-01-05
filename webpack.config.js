@@ -1,4 +1,4 @@
-const src = 'fancy-weather';
+const src = './';
 
 const path = require('path');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
@@ -28,7 +28,7 @@ function setDMode() {
 }
 
 const config = {
-  target: "web", 
+  target: "web",
   entry: `./${src}/js/main.js`,
   output: {
     path: path.resolve(__dirname, 'dist'),
